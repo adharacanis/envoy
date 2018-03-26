@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="envoy" package="com.etherlords.envoy" version="1.0.0" company="..." />
+	
+	<!-- output -->
+	<app main="Main" file="envoy" path="bin" swf-version="11.2" />
+	
+	<window background="#CCCCCC" fps="60"  if="flash"/>
+	<window background="#CCCCCC" fps="60"  if="html5"/>
+	<window width="800" height="800" resizable="false" borderless="false" unless="mobile" />
+	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+	
+	<!-- classpath, haxe libs -->
+	<source path="src" />
+	<source path="game\src" />
+	
+	<source path="..\swfdata\src" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	<haxelib name="format" />
+	<!-- 
+	<assets path="assets/img" rename="img"/>
+	<assets path="assets/ui" rename="ui"/>
+	<assets path="assets" rename="animation" include="*.animation|*.ani"/>
+	-->
+	
+	<!---><haxeflag name="-D textureFromBytes"/><!---->
+	<haxeflag name="-D webgl"/>
+	<!----> <haxeflag name="-D webgl1"/> <!---->
+	
+	<haxedef name="advanced-telemetry" if="flash" />
+	<!-- 
+	<haxedef name="no-inline"/>
+	-->
+	<!-- 
+	<haxeflag name="-dce full" /> 
+	-->
+</project>
