@@ -1,13 +1,11 @@
 package theater.troupe;
 
-import theater.troupe.model.PositionModel;
+import theater.troupe.model.BaseActorModel;
 
 class PositionComponent extends BaseComponent 
 {
-	public function new() 
+	public function new(model:BaseActorModel) 
 	{
-		super();
-		
-		model = new PositionModel(100, 300);
+		super(model);
 	}
 }

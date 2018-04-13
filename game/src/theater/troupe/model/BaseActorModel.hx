@@ -2,16 +2,24 @@ package theater.troupe.model;
 
 class BaseActorModel 
 {
-	public var subModels:Array<BaseActorModel>;
+	public var modelsList:Array<BaseActorModel>;
+	public var modelsMap:Map<String, BaseActorModel>;
 	
 	public function new() 
 	{
-		subModels = [];
+		modelsList = [];
+		modelsMap = new Map();
 	}
 	
-	public function addSubModel(model:BaseActorModel)
+	public function addModel(model:BaseActorModel)
 	{
-		subModels.push(model);
+		modelsList.push(model);
+		modelsMap.set(Type.getClassName(Type.getClass(model)), model);
 	}
 	
+	public function getModel<T:BaseActorModel>(clazz:Class<T>):Null<T>
+	{
+		var value = cast modelsMap.get(Type.getClassName(clazz));
+		return value;
+	}
 }

@@ -6,9 +6,17 @@ class BaseScene
 {
 	public var actorsList:Array<BaseActor>;
 	
+	var componentsList:Array<BaseSceneComponent>;
+	
 	public function new() 
 	{
 		actorsList = [];
+		componentsList = [];
+	}
+	
+	public function addComponent(sceneComponent:BaseSceneComponent)
+	{
+		componentsList.push(sceneComponent);
 	}
 	
 	public function addActor(actor:BaseActor)
@@ -20,6 +28,9 @@ class BaseScene
 	{
 		for (actor in actorsList)
 		{
+			for (sceneComponent in componentsList)
+				sceneComponent.update(actor);
+				
 			actor.update();
 		}
 	}

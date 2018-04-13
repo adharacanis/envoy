@@ -17,8 +17,8 @@ class BaseActor
 	
 	public function addComponent(component:BaseComponent)
 	{
-		if(component.model != null)
-			model.addSubModel(component.model);
+		//if(component.model != null)
+		//	model.addModel(component.model);
 			
 		componentsList.push(component);
 		componentsMap.set(Type.getClassName(Type.getClass(component)), component);

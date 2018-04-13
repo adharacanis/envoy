@@ -73,6 +73,7 @@ class Main extends Sprite
 		glStage = new GlStage(stage, context3D, textureStorage);
 		
 		assetsManager = new AssetsManager(textureStorage, textureManager);
+		assetsManager.createDefaultTexture();
 		assetsManager.addEventListener(Event.COMPLETE, onAssetReady);
 	}
 	
