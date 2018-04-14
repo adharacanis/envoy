@@ -44,6 +44,11 @@ class TestGameSceneController
 		positionModel.worldPositionX = 100 + Math.random() * 300;
 		positionModel.worldPositionY = 100 + Math.random() * 300;
 		
+		positionModel.worldPositionMovementToX = 100 + Math.random() * 300;//positionModel.worldPositionX;
+		positionModel.worldPositionMovementToY = 100 + Math.random() * 300;//positionModel.worldPositionY;
+		
+		trace(positionModel.worldPositionX, positionModel.worldPositionY);
+		
 		scene.addActor(bot);
 	}
 	

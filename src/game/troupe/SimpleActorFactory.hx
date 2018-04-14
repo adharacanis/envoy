@@ -25,7 +25,7 @@ class SimpleActorFactory
 		
 		
 		
-		var view = assetsManager.linkagesMap.get("default");
+		var view = assetsManager.linkagesMap.get("default").clone();
 		var viewComponent = new BaseViewComponent(actorModel, view);
 		
 		var positionComponent = new PositionComponent(actorModel);
