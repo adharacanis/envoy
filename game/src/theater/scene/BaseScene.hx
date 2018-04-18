@@ -24,14 +24,14 @@ class BaseScene
 		actorsList.push(actor);
 	}
 	
-	public function update()
+	public function update(worldStep:WorldStep)
 	{
 		for (actor in actorsList)
 		{
 			for (sceneComponent in componentsList)
-				sceneComponent.update(actor);
+				sceneComponent.update(worldStep, actor);
 				
-			actor.update();
+			actor.update(worldStep);
 		}
 	}
 	

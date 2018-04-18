@@ -30,11 +30,11 @@ class BaseActor
 		return value;
 	}
 	
-	public function update()
+	public function update(worldStep:WorldStep)
 	{
 		for (component in componentsList)
 		{
-			component.update();
+			component.update(worldStep);
 		}
 	}
 }

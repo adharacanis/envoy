@@ -75,7 +75,11 @@ class Main extends Sprite
 		assetsManager = new AssetsManager(textureStorage, textureManager);
 		assetsManager.createDefaultTexture();
 		assetsManager.addEventListener(Event.COMPLETE, onAssetReady);
+		
+		worldTime = new WorldTimeController();
 	}
+	
+	var worldTime:WorldTimeController;
 	
 	private function onAssetReady(e:Event):Void 
 	{	
@@ -86,6 +90,9 @@ class Main extends Sprite
 	
 	private function onUpdate(e:Event):Void 
 	{	
-		gameContorller.update();
+		if (worldTime != null)
+			worldTime.updateTime();
+			
+		gameContorller.update(worldTime.worldStep);
 	}
 }

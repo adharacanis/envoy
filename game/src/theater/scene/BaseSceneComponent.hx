@@ -10,7 +10,7 @@ class BaseSceneComponent
 		
 	}
 	
-	public function update(actor:BaseActor)
+	public function update(worldStep:WorldStep, actor:BaseActor)
 	{
 		
 	}

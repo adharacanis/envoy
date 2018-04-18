@@ -10,7 +10,7 @@ class BaseComponent
 		this.model = model;
 	}
 	
-	public function update()
+	public function update(worldStep:WorldStep)
 	{
 		
 	}

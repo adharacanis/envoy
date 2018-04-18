@@ -30,11 +30,11 @@ class TestGameSceneController
 	{
 		var player = SimpleActorFactory.makeSimpleActor();
 		mouseController.setPlayerData(player.model);
-		//scene.addActor(player);
+		scene.addActor(player);
 		
-		spawnBot();
-		spawnBot();
-		spawnBot();
+		//spawnBot();
+		//spawnBot();
+		//spawnBot();
 	}
 	
 	function spawnBot()
@@ -52,9 +52,9 @@ class TestGameSceneController
 		scene.addActor(bot);
 	}
 	
-	public function update()
+	public function update(worldStep:WorldStep)
 	{
-		scene.update();
+		scene.update(worldStep);
 		stage.update();
 	}
 	

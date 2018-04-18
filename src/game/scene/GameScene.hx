@@ -21,8 +21,8 @@ class GameScene extends BaseScene
 		stage.addDisplayObject(actor.getComponent(BaseViewComponent).view);
 	}
 	
-	override public function update() 
+	override public function update(worldStep:WorldStep) 
 	{
-		super.update();
+		super.update(worldStep);
 	}
 }

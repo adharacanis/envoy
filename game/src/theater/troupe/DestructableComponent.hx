@@ -12,9 +12,9 @@ class DestructableComponent extends BaseComponent
 		descturctableModel = Lang.as2(model, DestructableModel);
 	}
 	
-	override public function update() 
+	override public function update(worldStep:WorldStep) 
 	{
-		super.update();
+		super.update(worldStep);
 		
 		//if (descturctableModel.currentHealth <= descturctableModel.maxHealth)
 		//	trace('destruction');

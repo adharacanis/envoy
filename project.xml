@@ -30,6 +30,7 @@
 	
 	<!---><haxeflag name="-D textureFromBytes"/><!---->
 	<haxeflag name="-D webgl"/>
+	<!---><haxeflag name="-D uniform_buffer"/><!---->
 	<!----> <haxeflag name="-D webgl1"/> <!---->
 	
 	<haxedef name="advanced-telemetry" if="flash" />

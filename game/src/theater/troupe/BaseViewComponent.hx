@@ -20,13 +20,13 @@ class BaseViewComponent extends BaseComponent
 		this.view = view;
 	}
 	
-	override public function update() 
+	override public function update(worldStep:WorldStep) 
 	{
 		view.x = positionModel.worldPositionX;
 		view.y = positionModel.worldPositionY;
 		
 		
-		super.update();
+		super.update(worldStep);
 	}
 	
 }
