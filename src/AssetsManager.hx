@@ -83,17 +83,24 @@ class AssetsManager extends EventDispatcher
 	
 	public function createDefaultTexture()
 	{
-		var bitmap:BitmapData = new BitmapData(32, 32, false, 0xFF0000);
-		var textureSource = new TextureSource(bitmap, 32, 32, textureManager);
+		var padding:Float = 5;
+		
+		var bitmap:BitmapData = new BitmapData(64, 64, true, 0);
+		var z = 0.5;
+		bitmap.fillRect(new Rectangle(padding-z, padding-z, 32+z*2, 32+z*2), 0x55FF0000);
+		bitmap.fillRect(new Rectangle(padding, padding, 32, 32), 0xFFFF0000);
+		
+		var textureSource = new TextureSource(bitmap, 64, 64, textureManager);
 		
 		textureSource.createGlData(Context3DTextureFormat.BGRA);
 		textureSource.uploadToGpu();
 		
+		
 		var combinedTextureId = new TextureId(0, 0);
-		var shape = new ShapeData(combinedTextureId, new Rectangle(0, 0, 32, 32));
+		var shape = new ShapeData(combinedTextureId, new Rectangle(-(padding + 16), -(padding + 16), 32, 32));
 		shape.transform = new Matrix();
 		
-		var texture:GLSubTexture = new GLSubTexture(0, new Rectangle(0, 0, 32, 32), new TextureTransform(1, 1, 0, 0), textureSource, 0, Context3DTextureFormat.BGRA);
+		var texture:GLSubTexture = new GLSubTexture(0, new Rectangle(0, 0, 32 + padding * 2, 32 + padding * 2), new TextureTransform(1, 1, 0, 0), textureSource, 0, Context3DTextureFormat.BGRA);
 		textureStorage.putTexture(combinedTextureId, texture);
 		
 		linkagesMap["default"] = shape;

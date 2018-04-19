@@ -20,10 +20,10 @@ class SimpleMovementSceneComponent extends BaseSceneComponent
 		
 		//trace(model.movementVector.x, model.movementVector.y);
 		
-		trace('move factor x=${model.movementVector.x * model.speed * worldStep.step}, y=${model.movementVector.y * model.speed * worldStep.step}');
+		//trace('move factor x=${model.movementVector.x * model.speed * worldStep.step}, y=${model.movementVector.y * model.speed * worldStep.step}');
 		
-		model.worldPositionX += 0.26;// model.movementVector.x * model.speed * worldStep.step;
-		model.worldPositionY += 0.26;// model.movementVector.y * model.speed * worldStep.step;
+		model.worldPositionX += model.movementVector.x * model.speed * worldStep.step;
+		model.worldPositionY += model.movementVector.y * model.speed * worldStep.step;
 	}
 	
 	function calculate()

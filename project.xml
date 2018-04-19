@@ -9,7 +9,7 @@
 	<app main="Main" file="envoy" path="bin" swf-version="11.2" />
 	
 	<window background="#CCCCCC" fps="60"  if="flash"/>
-	<window background="#CCCCCC" fps="60"  if="html5"/>
+	<window background="#CCCCCC" fps="60" antialiasing="0" if="html5"/>
 	<window width="800" height="800" resizable="false" borderless="false" unless="mobile" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	

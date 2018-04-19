@@ -58,7 +58,7 @@ class Main extends Sprite
 		@:privateAccess context3D.__vertexConstants = new lime.utils.Float32Array(4 * Renderer.MAX_VERTEX_CONSTANTS);
 		@:privateAccess context3D.__fragmentConstants = new lime.utils.Float32Array(4 * Renderer.MAX_VERTEX_CONSTANTS);
 		
-		context3D.configureBackBuffer(stage.stageWidth, stage.stageHeight, 0, true);
+		context3D.configureBackBuffer(stage.stageWidth, stage.stageHeight, 16, true);
 		context3D.setCulling(Context3DTriangleFace.NONE);
 		
 		//#if debug

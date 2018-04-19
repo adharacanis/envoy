@@ -32,6 +32,13 @@ class TestGameSceneController
 		mouseController.setPlayerData(player.model);
 		scene.addActor(player);
 		
+		var positionModel = player.model.getModel(PositionModel);
+		positionModel.worldPositionX = 100 + 16;
+		positionModel.worldPositionY = 100 + 16;
+		
+		positionModel.worldPositionMovementToX = 100 + 16;
+		positionModel.worldPositionMovementToY = 100 + 16;
+		
 		//spawnBot();
 		//spawnBot();
 		//spawnBot();

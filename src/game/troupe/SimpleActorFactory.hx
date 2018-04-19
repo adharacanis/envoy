@@ -1,5 +1,6 @@
 package game.troupe;
 
+import swfdata.DisplayObjectData;
 import theater.troupe.BaseActor;
 import theater.troupe.BaseViewComponent;
 import theater.troupe.DestructableComponent;
@@ -23,9 +24,7 @@ class SimpleActorFactory
 		
 		actorModel.addModel(positionModel);
 		
-		
-		
-		var view = assetsManager.linkagesMap.get("default").clone();
+		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
 		var viewComponent = new BaseViewComponent(actorModel, view);
 		
 		var positionComponent = new PositionComponent(actorModel);
