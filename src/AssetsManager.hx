@@ -1,7 +1,6 @@
 package;
 
 import AtlasGenerator;
-import assets.AssetLoader;
 import assets.AssetsStorage;
 import openfl.Assets;
 import openfl.display.BitmapData;
@@ -15,7 +14,6 @@ import openfl.utils.Endian;
 import renderer.TextureManager;
 import swfdata.DisplayObjectData;
 import swfdata.ShapeData;
-import swfdata.SpriteData;
 import swfdata.atlas.GLSubTexture;
 import swfdata.atlas.TextureId;
 import swfdata.atlas.TextureSource;
@@ -24,6 +22,7 @@ import swfdata.atlas.TextureTransform;
 import swfdata.datatags.SwfPackerTag;
 import swfdataexporter.SwfExporter;
 import swfparser.SwfParserLight;
+//import assets.AssetLoader;
 
 class AssetsManager extends EventDispatcher
 {
@@ -45,9 +44,9 @@ class AssetsManager extends EventDispatcher
 		this.textureStorage = textureStorage;
 		
 		assetsStorage = new AssetsStorage();
-		var assetsLoader:AssetLoader = new AssetLoader(assetsStorage);
+		//var assetsLoader:AssetLoader = new AssetLoader(assetsStorage);
 		//assetsLoader.addToQueue("animation/a.ani");
-		assetsLoader.addToQueue("animation/biker.ani");
+		//assetsLoader.addToQueue("animation/biker.ani");
 		//assetsLoader.addToQueue("animation/teslagirl.ani");
 		//assetsLoader.addToQueue("animation/bath.animation");
 		//assetsLoader.addToQueue("animation/albion_mirabelle.animation");
@@ -60,14 +59,14 @@ class AssetsManager extends EventDispatcher
 		
 		
 		
-		assetsLoader.addEventListener(Event.COMPLETE, onAssetsLoaded);
-		assetsLoader.load();
+		//assetsLoader.addEventListener(Event.COMPLETE, onAssetsLoaded);
+		//assetsLoader.load();
 	}
 	
 	private function onAssetsLoaded(e:Event):Void 
 	{
 		//parseAsset("animation/a.ani");
-		parseAsset("animation/biker.ani");
+		//parseAsset("animation/biker.ani");
 		//parseAsset("animation/teslagirl.ani");
 		//parseAsset("animation/bath.animation");
 		//parseAsset("animation/albion_mirabelle.animation");

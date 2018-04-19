@@ -39,6 +39,8 @@ class TestGameSceneController
 		positionModel.worldPositionMovementToX = 100 + 16;
 		positionModel.worldPositionMovementToY = 100 + 16;
 		
+		trace('initialise level');
+		
 		//spawnBot();
 		//spawnBot();
 		//spawnBot();

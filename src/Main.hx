@@ -2,7 +2,6 @@ package;
 
 import game.scene.TestGameSceneController;
 import gl.GlStage;
-import haxe.io.Bytes;
 import openfl.display.Sprite;
 import openfl.display3D.Context3D;
 import openfl.display3D.Context3DCompareMode;
@@ -34,6 +33,9 @@ class Main extends Sprite
 			initialize();
 		else
 			addEventListener(Event.ADDED_TO_STAGE, initialize);
+			
+		this.graphics.lineStyle(2, 0xFF0000);
+		this.graphics.drawRect(100, 100, 100, 100);
 	}
 	
 	private function initialize(e:Event = null):Void 
@@ -55,14 +57,17 @@ class Main extends Sprite
 	{
 		context3D = stage.stage3Ds[0].context3D;
 		
+		trace(context3D);
+		
 		@:privateAccess context3D.__vertexConstants = new lime.utils.Float32Array(4 * Renderer.MAX_VERTEX_CONSTANTS);
 		@:privateAccess context3D.__fragmentConstants = new lime.utils.Float32Array(4 * Renderer.MAX_VERTEX_CONSTANTS);
 		
+		trace('create viewport', stage.stageWidth, stage.stageHeight);
 		context3D.configureBackBuffer(stage.stageWidth, stage.stageHeight, 16, true);
 		context3D.setCulling(Context3DTriangleFace.NONE);
 		
 		//#if debug
-		//	context3D.enableErrorChecking = true;
+			context3D.enableErrorChecking = true;
 		//#end
 		
 		context3D.setDepthTest(true, Context3DCompareMode.ALWAYS);
@@ -77,6 +82,8 @@ class Main extends Sprite
 		assetsManager.addEventListener(Event.COMPLETE, onAssetReady);
 		
 		worldTime = new WorldTimeController();
+		
+		onAssetReady(null);
 	}
 	
 	var worldTime:WorldTimeController;
@@ -86,6 +93,7 @@ class Main extends Sprite
 		stage.addEventListener(Event.ENTER_FRAME, onUpdate);
 		
 		gameContorller = new TestGameSceneController(glStage, assetsManager);
+		trace('on assets ready');
 	}
 	
 	private function onUpdate(e:Event):Void 
