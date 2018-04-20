@@ -2,6 +2,7 @@ package;
 
 import game.scene.TestGameSceneController;
 import gl.GlStage;
+import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.display3D.Context3D;
 import openfl.display3D.Context3DCompareMode;
@@ -34,8 +35,12 @@ class Main extends Sprite
 		else
 			addEventListener(Event.ADDED_TO_STAGE, initialize);
 			
-		this.graphics.lineStyle(2, 0xFF0000);
-		this.graphics.drawRect(100, 100, 100, 100);
+		//this.graphics.lineStyle(2, 0xFF0000);
+		//	this.graphics.drawRect(100, 100, 100, 100);
+		
+		var _fps = new FPS(10,10,0xffffff);
+		_fps.y = 40;
+		stage.addChild(_fps);
 	}
 	
 	private function initialize(e:Event = null):Void 

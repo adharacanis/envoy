@@ -33,11 +33,11 @@ class TestGameSceneController
 		scene.addActor(player);
 		
 		var positionModel = player.model.getModel(PositionModel);
-		positionModel.worldPositionX = 100 + 16;
-		positionModel.worldPositionY = 100 + 16;
+		positionModel.worldPosition.x = 100 + 16;
+		positionModel.worldPosition.y = 100 + 16;
 		
-		positionModel.worldPositionMovementToX = 100 + 16;
-		positionModel.worldPositionMovementToY = 100 + 16;
+		positionModel.destinetionPosition.x = 100 + 16;
+		positionModel.destinetionPosition.y = 100 + 16;
 		
 		trace('initialise level');
 		
@@ -50,13 +50,11 @@ class TestGameSceneController
 	{
 		var bot = SimpleActorFactory.makeSimpleActor();
 		var positionModel = bot.model.getModel(PositionModel);
-		positionModel.worldPositionX = 100 + Math.random() * 300;
-		positionModel.worldPositionY = 100 + Math.random() * 300;
+		positionModel.worldPosition.x = 100 + Math.random() * 300;
+		positionModel.worldPosition.y = 100 + Math.random() * 300;
 		
-		positionModel.worldPositionMovementToX = 100 + Math.random() * 300;//positionModel.worldPositionX;
-		positionModel.worldPositionMovementToY = 100 + Math.random() * 300;//positionModel.worldPositionY;
-		
-		trace(positionModel.worldPositionX, positionModel.worldPositionY);
+		positionModel.destinetionPosition.x = 100 + Math.random() * 300;//positionModel.worldPositionX;
+		positionModel.destinetionPosition.y = 100 + Math.random() * 300;//positionModel.worldPositionY;
 		
 		scene.addActor(bot);
 	}

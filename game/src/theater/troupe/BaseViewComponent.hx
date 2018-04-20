@@ -23,11 +23,11 @@ class BaseViewComponent extends BaseComponent
 	var theta:Float = Math.PI / 360;
 	override public function update(worldStep:WorldStep) 
 	{
-		view.x = positionModel.worldPositionX;
-		view.y = positionModel.worldPositionY;
+		view.x = (view.x + positionModel.worldPosition.x) / 2;
+		view.y = (view.y + positionModel.worldPosition.y) / 2;
 		
 		
-		view.transform.rotate(theta);
+		//view.transform.rotate(theta);
 		
 		
 		super.update(worldStep);

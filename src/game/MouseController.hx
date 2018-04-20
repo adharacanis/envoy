@@ -20,8 +20,8 @@ class MouseController
 	
 	private function onMouseDown(e:MouseEvent):Void 
 	{
-		positionModel.worldPositionMovementToX = e.stageX;
-		positionModel.worldPositionMovementToY = e.stageY;
+		positionModel.destinetionPosition.x = e.stageX;
+		positionModel.destinetionPosition.y = e.stageY;
 	}
 	
 }

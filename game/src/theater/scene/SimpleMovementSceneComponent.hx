@@ -3,6 +3,8 @@ package theater.scene;
 import theater.troupe.BaseActor;
 import theater.troupe.model.PositionModel;
 
+using lime.math.Vector2;
+
 class SimpleMovementSceneComponent extends BaseSceneComponent
 {
 	
@@ -15,15 +17,26 @@ class SimpleMovementSceneComponent extends BaseSceneComponent
 	{
 		var model:PositionModel = actor.model.getModel(PositionModel);
 		
-		model.movementVector.setTo(model.worldPositionMovementToX - model.worldPositionX, model.worldPositionMovementToY - model.worldPositionY);
-		model.movementVector.normalize(1);
+		var speed = model.speed;
+		var step = worldStep.step;
 		
-		//trace(model.movementVector.x, model.movementVector.y);
+		var startPosition = model.worldPosition;
+		var destinetionPosition = model.destinetionPosition;
+		var direction = model.direction;
 		
-		//trace('move factor x=${model.movementVector.x * model.speed * worldStep.step}, y=${model.movementVector.y * model.speed * worldStep.step}');
+		var distance = destinetionPosition.distance(startPosition);
+		if (distance == 0)
+			return;
+		direction.setTo((destinetionPosition.x - startPosition.x) / distance, (destinetionPosition.y - startPosition.y) / distance);
 		
-		model.worldPositionX += model.movementVector.x * model.speed * worldStep.step;
-		model.worldPositionY += model.movementVector.y * model.speed * worldStep.step;
+		var movementDistance = speed * step;
+		
+		if (distance < movementDistance) {
+			movementDistance = distance;
+		}
+		
+		startPosition.x += direction.x * movementDistance;
+		startPosition.y += direction.y * movementDistance;
 	}
 	
 	function calculate()
