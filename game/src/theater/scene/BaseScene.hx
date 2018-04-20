@@ -1,5 +1,6 @@
 package theater.scene;
 
+import theater.events.SceneEvent;
 import theater.troupe.BaseActor;
 
 class BaseScene 
@@ -22,6 +23,7 @@ class BaseScene
 	public function addActor(actor:BaseActor)
 	{
 		actorsList.push(actor);
+		actor.dispatchEvent(new SceneEvent(SceneEvent.ADDED_TO_SCENE));
 	}
 	
 	public function update(worldStep:WorldStep)

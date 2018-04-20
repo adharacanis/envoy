@@ -89,6 +89,8 @@ class AssetsManager extends EventDispatcher
 		bitmap.fillRect(new Rectangle(padding-z, padding-z, 32+z*2, 32+z*2), 0x55FF0000);
 		bitmap.fillRect(new Rectangle(padding, padding, 32, 32), 0xFFFF0000);
 		
+		bitmap.fillRect(new Rectangle(padding - z + 32 / 2, padding - z + (32 / 2 - 4), 32 / 2, 8 + z), 0xFF00FF00);
+		
 		var textureSource = new TextureSource(bitmap, 64, 64, textureManager);
 		
 		textureSource.createGlData(Context3DTextureFormat.BGRA);

@@ -30,7 +30,6 @@ class TestGameSceneController
 	{
 		var player = SimpleActorFactory.makeSimpleActor();
 		mouseController.setPlayerData(player.model);
-		scene.addActor(player);
 		
 		var positionModel = player.model.getModel(PositionModel);
 		positionModel.worldPosition.x = 100 + 16;
@@ -39,11 +38,13 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + 16;
 		positionModel.destinetionPosition.y = 100 + 16;
 		
+		scene.addActor(player);
+		
 		trace('initialise level');
 		
-		//spawnBot();
-		//spawnBot();
-		//spawnBot();
+		spawnBot();
+		spawnBot();
+		spawnBot();
 	}
 	
 	function spawnBot()

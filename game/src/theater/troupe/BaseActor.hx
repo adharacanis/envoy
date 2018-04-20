@@ -1,8 +1,10 @@
 package theater.troupe;
 
+import events.Event;
+import events.Observer;
 import theater.troupe.model.BaseActorModel;
 
-class BaseActor 
+class BaseActor extends Observer
 {
 	public var model:BaseActorModel;
 	public var componentsList:Array<BaseComponent>;
@@ -10,6 +12,8 @@ class BaseActor
 	
 	public function new(model:BaseActorModel) 
 	{
+		super();
+		
 		this.model = model;
 		componentsList = [];
 		componentsMap = new Map();
@@ -28,6 +32,16 @@ class BaseActor
 	{
 		var value = cast componentsMap.get(Type.getClassName(clazz));
 		return value;
+	}
+	
+	override public function dispatchEvent(event:Event):Void 
+	{
+		super.dispatchEvent(event);
+		
+		for (actorComponent in componentsList)
+		{
+			actorComponent.dispatchEvent(event);
+		}
 	}
 	
 	public function update(worldStep:WorldStep)
