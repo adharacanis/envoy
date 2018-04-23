@@ -5,7 +5,7 @@ import theater.troupe.model.PositionModel;
 
 using lime.math.Vector2;
 
-class SimpleMovementSceneComponent extends BaseSceneComponent
+class SimplePhysicSceneComponent extends BaseSceneComponent
 {
 	
 	public function new() 
@@ -27,6 +27,7 @@ class SimpleMovementSceneComponent extends BaseSceneComponent
 		var distance = destinetionPosition.distance(startPosition);
 		if (distance == 0)
 			return;
+			
 		direction.setTo((destinetionPosition.x - startPosition.x) / distance, (destinetionPosition.y - startPosition.y) / distance);
 		
 		var movementDistance = speed * step;

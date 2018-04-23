@@ -4,11 +4,17 @@ import haxe.Constraints.Function;
 
 class Observer implements IObserver
 {
-	private var describes:Map<String, Array<Function>> = new Map<String, Array<Function>>();
+	var describes:Map<String, Array<Function>> = new Map<String, Array<Function>>();
+	var target:IObserver;
 	
-	public function new() 
+	public function new(target:IObserver) 
 	{
-		
+		this.target = target;
+	}
+	
+	public function hasEventListener(type:String)
+	{
+		return describes[type] != null;
 	}
 
 	public function addEventListener(type:String, callback:Function):Void

@@ -5,6 +5,8 @@ class BaseActorModel
 	public var modelsList:Array<BaseActorModel>;
 	public var modelsMap:Map<String, BaseActorModel>;
 	
+	public var target:BaseActorModel;
+	
 	public function new() 
 	{
 		modelsList = [];

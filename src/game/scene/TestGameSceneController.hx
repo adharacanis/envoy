@@ -3,7 +3,9 @@ package game.scene;
 import game.MouseController;
 import game.troupe.SimpleActorFactory;
 import gl.GlStage;
-import theater.scene.SimpleMovementSceneComponent;
+import theater.scene.ProjectileSceneController;
+import theater.scene.SimplePhysicSceneComponent;
+import theater.troupe.BaseActor;
 import theater.troupe.model.PositionModel;
 
 class TestGameSceneController 
@@ -21,14 +23,21 @@ class TestGameSceneController
 		mouseController = new MouseController(stage.stage);
 		
 		scene = new GameScene(stage);
-		scene.addComponent(new SimpleMovementSceneComponent());
+		scene.addComponent(new SimplePhysicSceneComponent());
+		scene.addComponent(new ProjectileSceneController(scene));
 		
 		initialise();
 	}
 	
+	function spawnActor(actor:BaseActor)
+	{
+		scene.addActor(actor);
+	}
+	
+	var player:BaseActor;
 	function initialise() 
 	{
-		var player = SimpleActorFactory.makeSimpleActor();
+		player = SimpleActorFactory.makeSimpleActor();
 		mouseController.setPlayerData(player.model);
 		
 		var positionModel = player.model.getModel(PositionModel);
@@ -38,7 +47,7 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + 16;
 		positionModel.destinetionPosition.y = 100 + 16;
 		
-		scene.addActor(player);
+		spawnActor(player);
 		
 		trace('initialise level');
 		
@@ -57,7 +66,7 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + Math.random() * 300;//positionModel.worldPositionX;
 		positionModel.destinetionPosition.y = 100 + Math.random() * 300;//positionModel.worldPositionY;
 		
-		scene.addActor(bot);
+		spawnActor(bot);
 	}
 	
 	public function update(worldStep:WorldStep)
