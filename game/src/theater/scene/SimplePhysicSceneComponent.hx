@@ -26,8 +26,13 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 		
 		var distance = destinetionPosition.distance(startPosition);
 		if (distance == 0)
+		{
+			actor.model.state = 0;
 			return;
+		}
 			
+		actor.model.state = 1; 
+		
 		direction.setTo((destinetionPosition.x - startPosition.x) / distance, (destinetionPosition.y - startPosition.y) / distance);
 		
 		var movementDistance = speed * step;

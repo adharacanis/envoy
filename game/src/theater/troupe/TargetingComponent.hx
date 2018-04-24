@@ -19,5 +19,6 @@ class TargetingComponent extends BaseComponent
 		super.update(worldStep);
 		
 		var target = enverionmentModel.actorsInRange[0];
+		model.target = target;
 	}
 }

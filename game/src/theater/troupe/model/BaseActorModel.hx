@@ -7,6 +7,8 @@ class BaseActorModel
 	
 	public var target:BaseActorModel;
 	
+	public var state:Int = 0;
+	
 	public function new() 
 	{
 		modelsList = [];

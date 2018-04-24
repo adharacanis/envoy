@@ -19,10 +19,10 @@ class BaseComponent extends Observer
 	
 	private function initialize()
 	{
-		addEventListener(SceneEvent.ADDED_TO_SCENE, onAddedToScene);
+		
 	}
 	
-	private function onAddedToScene(e:SceneEvent):Void 
+	public function onAddedToScene():Void 
 	{
 		
 	}

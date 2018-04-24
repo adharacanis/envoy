@@ -7,8 +7,11 @@ import theater.troupe.BaseActor;
 import theater.troupe.BaseViewComponent;
 import theater.troupe.DestructableComponent;
 import theater.troupe.PositionComponent;
+import theater.troupe.ProjectileViewComponent;
+import theater.troupe.TargetingComponent;
 import theater.troupe.model.AttackModel;
 import theater.troupe.model.BaseActorModel;
+import theater.troupe.model.EnverionmentModel;
 import theater.troupe.model.PositionModel;
 
 class SimpleActorFactory 
@@ -25,21 +28,29 @@ class SimpleActorFactory
 		var actorModel = new BaseActorModel();
 		var positionModel = new PositionModel();
 		var attackModle = new AttackModel();
+		var enverionmentModel = new EnverionmentModel();
+		
+		attackModle.attackCooldown = 100 + Math.random() * 100;
 		
 		actorModel.addModel(positionModel);
 		actorModel.addModel(attackModle);
+		actorModel.addModel(enverionmentModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
 		var viewComponent = new BaseViewComponent(actorModel, view);
 		
 		var positionComponent = new PositionComponent(actorModel);
 		var attackComponent = new AttackComponent(actorModel);
+		var targetingComponent = new TargetingComponent(actorModel);
 		
 		var actor = new BaseActor(actorModel);
 		
 		actor.addComponent(viewComponent);
 		actor.addComponent(positionComponent);
 		actor.addComponent(attackComponent);
+		actor.addComponent(targetingComponent);
+		
+		positionModel.speed = 250;
 		
 		//positionModel.worldPositionX = 200;
 		//positionModel.worldPositionY = 100;
@@ -58,16 +69,16 @@ class SimpleActorFactory
 		actorModel.addModel(positionModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
-		view.transform.scale(0.25, 0.25);
+		view.transform.scale(0.5, 0.5);
 		
-		var viewComponent = new BaseViewComponent(actorModel, view);
+		var viewComponent = new ProjectileViewComponent(actorModel, view);
 		
 		var positionComponent = new PositionComponent(actorModel);
 		//var destructableComponent = new DestructableComponent();
 		
 		var actor = new BaseActor(actorModel);
 		
-		actor.addComponent(viewComponent);
+		actor.addComponentAs(BaseViewComponent, viewComponent);
 		actor.addComponent(positionComponent);
 		
 		var ownerPositionModel:PositionModel = owner.getModel(PositionModel);
@@ -75,10 +86,10 @@ class SimpleActorFactory
 		positionModel.worldPosition.x = ownerPositionModel.worldPosition.x;
 		positionModel.worldPosition.y = ownerPositionModel.worldPosition.y;
 		
-		positionModel.destinetionPosition.x = direction.x * 1000;
-		positionModel.destinetionPosition.y = direction.y * 1000;
+		positionModel.destinetionPosition.x = positionModel.worldPosition.x + direction.x * 1000;
+		positionModel.destinetionPosition.y = positionModel.worldPosition.y + direction.y * 1000;
 		
-		positionModel.speed = 250 + ownerPositionModel.speed;
+		positionModel.speed = 500;// + ownerPositionModel.speed;
 		
 		return actor;
 	}

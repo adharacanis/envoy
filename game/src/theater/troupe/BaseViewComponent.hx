@@ -21,10 +21,8 @@ class BaseViewComponent extends BaseComponent
 		positionModel = model.getModel(PositionModel);
 	}
 	
-	override function onAddedToScene(e:SceneEvent):Void 
+	override public function onAddedToScene():Void 
 	{
-		super.onAddedToScene(e);
-		
 		//TODO: add flag on added/removed from scene. When flag turned off first time setPosition must set position instead of interpolate position and mark that "first-set-position" is made
 		view.x = positionModel.worldPosition.x;
 		view.y = positionModel.worldPosition.y;

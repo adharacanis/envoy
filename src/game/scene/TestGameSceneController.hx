@@ -6,6 +6,7 @@ import gl.GlStage;
 import theater.scene.ProjectileSceneController;
 import theater.scene.SimplePhysicSceneComponent;
 import theater.troupe.BaseActor;
+import theater.troupe.model.EnverionmentModel;
 import theater.troupe.model.PositionModel;
 
 class TestGameSceneController 
@@ -51,14 +52,20 @@ class TestGameSceneController
 		
 		trace('initialise level');
 		
-		spawnBot();
-		spawnBot();
-		spawnBot();
+		bot = spawnBot();
+		bot2 = spawnBot();
+		bot3 = spawnBot();
 	}
 	
+	var bot:BaseActor;
+	var bot3:BaseActor;
+	var bot2:BaseActor;
 	function spawnBot()
 	{
 		var bot = SimpleActorFactory.makeSimpleActor();
+		var envModel:EnverionmentModel = bot.model.getModel(EnverionmentModel);
+		envModel.actorsInRange.push(player.model);
+		
 		var positionModel = bot.model.getModel(PositionModel);
 		positionModel.worldPosition.x = 100 + Math.random() * 300;
 		positionModel.worldPosition.y = 100 + Math.random() * 300;
@@ -67,10 +74,29 @@ class TestGameSceneController
 		positionModel.destinetionPosition.y = 100 + Math.random() * 300;//positionModel.worldPositionY;
 		
 		spawnActor(bot);
+		return bot;
 	}
 	
 	public function update(worldStep:WorldStep)
 	{
+		if (bot != null && bot.model.state == 0)
+		{
+			bot.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			bot.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+		}
+		
+		if (bot2 != null && bot2.model.state == 0)
+		{
+			bot2.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			bot2.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+		}
+		
+		if (bot3 != null && bot3.model.state == 0)
+		{
+			bot3.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			bot3.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+		}
+		
 		scene.update(worldStep);
 		stage.update();
 	}

@@ -21,6 +21,7 @@ class AttackComponent extends BaseComponent
 		
 		if (model.target != null && checkCooldown(worldStep, attackModel))
 		{
+			attackModel.lastAttackTime = worldStep.currentTime;
 			dispatchEvent(new ActorEvent(ActorEvent.ATTACK, model));
 		}
 	}

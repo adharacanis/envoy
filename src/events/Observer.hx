@@ -4,10 +4,11 @@ import haxe.Constraints.Function;
 
 class Observer implements IObserver
 {
-	var describes:Map<String, Array<Function>> = new Map<String, Array<Function>>();
-	var target:IObserver;
+	public var target:IObserver;
 	
-	public function new(target:IObserver) 
+	var describes:Map<String, Array<Function>> = new Map<String, Array<Function>>();
+	
+	public function new(target:IObserver = null) 
 	{
 		this.target = target;
 	}
@@ -17,7 +18,7 @@ class Observer implements IObserver
 		return describes[type] != null;
 	}
 
-	public function addEventListener(type:String, callback:Function):Void
+	public function addEventListener(type:String, callback:Function)
 	{
 		var callbackList:Array<Function> = describes[type];
 		
@@ -30,9 +31,11 @@ class Observer implements IObserver
 		callbackList.push(callback);
 	}
 	
-	public function dispatchEvent(event:Event):Void
+	public function dispatchEvent(event:Event)
 	{
-		var callbackList:Array<Function> = describes[event.type];
+		var taget = this;
+		
+		var callbackList:Array<Function> = taget.describes[event.type];
 		
 		if (callbackList != null)
 		{
@@ -41,5 +44,10 @@ class Observer implements IObserver
 				callback(event);
 			}
 		}
+		
+		var target = taget.target;
+		
+		if (target != null)
+			target.dispatchEvent(event);
 	}
 }
