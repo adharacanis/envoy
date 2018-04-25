@@ -5,15 +5,14 @@ import swfdata.DisplayObjectData;
 import theater.troupe.AttackComponent;
 import theater.troupe.BaseActor;
 import theater.troupe.BaseViewComponent;
-import theater.troupe.DestructableComponent;
-import theater.troupe.LifetimeController;
+import theater.troupe.LifeTimeComponent;
 import theater.troupe.PositionComponent;
 import theater.troupe.ProjectileViewComponent;
 import theater.troupe.TargetingComponent;
 import theater.troupe.model.AttackModel;
 import theater.troupe.model.BaseActorModel;
 import theater.troupe.model.EnverionmentModel;
-import theater.troupe.model.LifetimeModel;
+import theater.troupe.model.LifeTimeModel;
 import theater.troupe.model.PositionModel;
 
 class SimpleActorFactory 
@@ -39,13 +38,14 @@ class SimpleActorFactory
 		actorModel.addModel(enverionmentModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
-		var viewComponent = new BaseViewComponent(actorModel, view);
-		
-		var positionComponent = new PositionComponent(actorModel);
-		var attackComponent = new AttackComponent(actorModel);
-		var targetingComponent = new TargetingComponent(actorModel);
 		
 		var actor = new BaseActor(actorModel);
+		
+		var viewComponent = new BaseViewComponent(actor, view);
+		var positionComponent = new PositionComponent(actor);
+		var attackComponent = new AttackComponent(actor);
+		var targetingComponent = new TargetingComponent(actor);
+		
 		
 		actor.addComponent(viewComponent);
 		actor.addComponent(positionComponent);
@@ -67,9 +67,9 @@ class SimpleActorFactory
 	{
 		var actorModel = new BaseActorModel();
 		var positionModel = new PositionModel();
-		var lifetimeModel = new LifetimeModel();
-		lifetimeModel.spawntime = WorldTimeController.now;
-		lifetimeModel.lifetime = 2500;
+		var lifetimeModel = new LifeTimeModel();
+		lifetimeModel.spawnTime = WorldTimeController.now;
+		lifetimeModel.lifeTime = 2500;
 		
 		actorModel.addModel(positionModel);
 		actorModel.addModel(lifetimeModel);
@@ -77,13 +77,13 @@ class SimpleActorFactory
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
 		view.transform.scale(0.5, 0.5);
 		
-		var viewComponent = new ProjectileViewComponent(actorModel, view);
-		
-		var positionComponent = new PositionComponent(actorModel);
-		var lifetimeComponent = new LifetimeController(actorModel);
-		//var destructableComponent = new DestructableComponent();
 		
 		var actor = new BaseActor(actorModel);
+		
+		var viewComponent = new ProjectileViewComponent(actor, view);
+		var positionComponent = new PositionComponent(actor);
+		var lifetimeComponent = new LifeTimeComponent(actor);
+		//var destructableComponent = new DestructableComponent();
 		
 		actor.addComponentAs(BaseViewComponent, viewComponent);
 		actor.addComponent(positionComponent);

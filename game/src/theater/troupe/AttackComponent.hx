@@ -2,15 +2,14 @@ package theater.troupe;
 
 import theater.events.ActorEvent;
 import theater.troupe.model.AttackModel;
-import theater.troupe.model.BaseActorModel;
 
 class AttackComponent extends BaseComponent 
 {
 	var attackModel:AttackModel;
 	
-	public function new(model:BaseActorModel = null) 
+	public function new(actor:BaseActor = null) 
 	{
-		super(model);
+		super(actor);
 		
 		attackModel = model.getModel(AttackModel);
 	}

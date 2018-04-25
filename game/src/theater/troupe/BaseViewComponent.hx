@@ -3,7 +3,6 @@ package theater.troupe;
 import swfdata.DisplayObjectData;
 import theater.events.SceneEvent;
 import theater.troupe.BaseComponent;
-import theater.troupe.model.BaseActorModel;
 import theater.troupe.model.PositionModel;
 
 class BaseViewComponent extends BaseComponent 
@@ -12,16 +11,16 @@ class BaseViewComponent extends BaseComponent
 	
 	public var view:DisplayObjectData;
 
-	public function new(model:BaseActorModel, view:DisplayObjectData) 
+	public function new(actor:BaseActor, view:DisplayObjectData) 
 	{
-		super(model);
+		super(actor);
 		
 		this.view = view;
 		
 		positionModel = model.getModel(PositionModel);
 	}
 	
-	override public function onAddedToScene():Void 
+	override public function onAddedToScene(e:SceneEvent):Void 
 	{
 		//TODO: add flag on added/removed from scene. When flag turned off first time setPosition must set position instead of interpolate position and mark that "first-set-position" is made
 		view.x = positionModel.worldPosition.x;

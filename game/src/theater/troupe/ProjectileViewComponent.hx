@@ -1,13 +1,12 @@
 package theater.troupe;
 
 import swfdata.DisplayObjectData;
-import theater.troupe.model.BaseActorModel;
 
 class ProjectileViewComponent extends BaseViewComponent 
 {
-	public function new(model:BaseActorModel, view:DisplayObjectData) 
+	public function new(actor:BaseActor, view:DisplayObjectData) 
 	{
-		super(model, view);
+		super(actor, view);
 	}
 	
 	override public function update(worldStep:WorldStep) 

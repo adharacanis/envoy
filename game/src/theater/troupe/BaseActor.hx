@@ -60,22 +60,6 @@ class BaseActor extends Observer
 		return value;
 	}
 	
-	override public function dispatchEvent(event:Event):Void 
-	{
-		super.dispatchEvent(event);
-		
-		if (event.type == SceneEvent.ADDED_TO_SCENE)
-		{
-			for (actorComponent in componentsList)
-				actorComponent.onAddedToScene();
-		}
-		
-		//for (actorComponent in componentsList)
-		//{
-		//	actorComponent.dispatchEvent(event);
-		//}
-	}
-	
 	public function update(worldStep:WorldStep)
 	{
 		for (component in componentsList)

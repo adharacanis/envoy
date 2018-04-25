@@ -1,15 +1,14 @@
 package theater.troupe;
 
-import theater.troupe.model.BaseActorModel;
 import theater.troupe.model.EnverionmentModel;
 
 class TargetingComponent extends BaseComponent 
 {
 	var enverionmentModel:EnverionmentModel;
 
-	public function new(model:BaseActorModel = null) 
+	public function new(actor:BaseActor = null) 
 	{
-		super(model);	
+		super(actor);	
 		
 		enverionmentModel = model.getModel(EnverionmentModel);
 	}

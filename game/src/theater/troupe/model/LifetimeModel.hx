@@ -1,9 +1,9 @@
 package theater.troupe.model;
 
-class LifetimeModel extends BaseActorModel
+class LifeTimeModel extends BaseActorModel
 {
-	public var lifetime:Float = 0;
-	public var spawntime:Float = 0;
+	public var lifeTime:Float = 0;
+	public var spawnTime:Float = 0;
 	
 	public function new() 
 	{

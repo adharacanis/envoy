@@ -6,23 +6,25 @@ import theater.troupe.model.BaseActorModel;
 
 class BaseComponent extends Observer
 {
+	public var actor:BaseActor;
 	public var model:BaseActorModel;
 
-	public function new(model:BaseActorModel = null) 
+	public function new(actor:BaseActor) 
 	{
-		super();
+		super(actor);
 		
-		this.model = model;
+		this.actor = actor;
+		this.model = actor.model;
 		
 		initialize();
 	}
 	
 	private function initialize()
 	{
-		
+		actor.addEventListener(SceneEvent.ADDED_TO_SCENE, onAddedToScene);
 	}
 	
-	public function onAddedToScene():Void 
+	private function onAddedToScene(e:SceneEvent):Void 
 	{
 		
 	}
