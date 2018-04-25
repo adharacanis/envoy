@@ -31,6 +31,12 @@ class BaseScene extends Observer
 		actor.target = this;
 	}
 	
+	public function removeActor(actor:BaseActor)
+	{
+		actorsList.remove(actor);
+		actor.target = null;
+	}
+	
 	public function update(worldStep:WorldStep)
 	{
 		for (actor in actorsList)

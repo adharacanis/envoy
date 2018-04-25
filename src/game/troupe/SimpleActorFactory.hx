@@ -6,12 +6,14 @@ import theater.troupe.AttackComponent;
 import theater.troupe.BaseActor;
 import theater.troupe.BaseViewComponent;
 import theater.troupe.DestructableComponent;
+import theater.troupe.LifetimeController;
 import theater.troupe.PositionComponent;
 import theater.troupe.ProjectileViewComponent;
 import theater.troupe.TargetingComponent;
 import theater.troupe.model.AttackModel;
 import theater.troupe.model.BaseActorModel;
 import theater.troupe.model.EnverionmentModel;
+import theater.troupe.model.LifetimeModel;
 import theater.troupe.model.PositionModel;
 
 class SimpleActorFactory 
@@ -65,8 +67,12 @@ class SimpleActorFactory
 	{
 		var actorModel = new BaseActorModel();
 		var positionModel = new PositionModel();
+		var lifetimeModel = new LifetimeModel();
+		lifetimeModel.spawntime = WorldTimeController.now;
+		lifetimeModel.lifetime = 2500;
 		
 		actorModel.addModel(positionModel);
+		actorModel.addModel(lifetimeModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
 		view.transform.scale(0.5, 0.5);
@@ -74,12 +80,14 @@ class SimpleActorFactory
 		var viewComponent = new ProjectileViewComponent(actorModel, view);
 		
 		var positionComponent = new PositionComponent(actorModel);
+		var lifetimeComponent = new LifetimeController(actorModel);
 		//var destructableComponent = new DestructableComponent();
 		
 		var actor = new BaseActor(actorModel);
 		
 		actor.addComponentAs(BaseViewComponent, viewComponent);
 		actor.addComponent(positionComponent);
+		actor.addComponent(lifetimeComponent);
 		
 		var ownerPositionModel:PositionModel = owner.getModel(PositionModel);
 		
@@ -89,7 +97,7 @@ class SimpleActorFactory
 		positionModel.destinetionPosition.x = positionModel.worldPosition.x + direction.x * 1000;
 		positionModel.destinetionPosition.y = positionModel.worldPosition.y + direction.y * 1000;
 		
-		positionModel.speed = 500;// + ownerPositionModel.speed;
+		positionModel.speed = 300;// + ownerPositionModel.speed;
 		
 		return actor;
 	}

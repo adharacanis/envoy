@@ -3,6 +3,7 @@ package game.scene;
 import game.MouseController;
 import game.troupe.SimpleActorFactory;
 import gl.GlStage;
+import theater.events.ActorEvent;
 import theater.scene.ProjectileSceneController;
 import theater.scene.SimplePhysicSceneComponent;
 import theater.troupe.BaseActor;
@@ -55,6 +56,8 @@ class TestGameSceneController
 		bot = spawnBot();
 		bot2 = spawnBot();
 		bot3 = spawnBot();
+		
+		scene.addEventListener(ActorEvent.DEATH, onActorDeath);
 	}
 	
 	var bot:BaseActor;
@@ -75,6 +78,11 @@ class TestGameSceneController
 		
 		spawnActor(bot);
 		return bot;
+	}
+	
+	private function onActorDeath(e:ActorEvent):Void 
+	{
+		scene.removeActor(e.actor);
 	}
 	
 	public function update(worldStep:WorldStep)

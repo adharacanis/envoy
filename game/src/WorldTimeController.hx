@@ -7,6 +7,8 @@ class WorldTimeController
 	public var currentTime = Date.now().getTime();
 	public var worldStep:WorldStep = new WorldStep();
 	
+	public static var now:Float = 0;
+	
 	public function new() 
 	{
 		if (lastTime == 0)
@@ -30,5 +32,7 @@ class WorldTimeController
 		worldStep.currentTime = this.currentTime;
 		worldStep.deltaTime = dt;
 		worldStep.step = dt / 1000;
+		
+		now = currentTime;
 	}
 }
