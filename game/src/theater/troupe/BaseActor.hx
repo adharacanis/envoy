@@ -8,8 +8,8 @@ import theater.troupe.model.BaseActorModel;
 class BaseActor extends Observer
 {
 	public var model:BaseActorModel;
-	public var componentsList:Array<BaseComponent>;
-	public var componentsMap:Map<String, BaseComponent>;
+	public var componentsList:Array<BaseActorComponent>;
+	public var componentsMap:Map<String, BaseActorComponent>;
 	
 	public function new(model:BaseActorModel) 
 	{
@@ -20,7 +20,7 @@ class BaseActor extends Observer
 		componentsMap = new Map();
 	}
 	
-	public function addComponentAs<T:BaseComponent>(type:Class<T>, component:BaseComponent)
+	public function addComponentAs<T:BaseActorComponent>(type:Class<T>, component:BaseActorComponent)
 	{
 		componentsList.push(component);
 		var typeValue = Type.getClassName(type);
@@ -29,7 +29,7 @@ class BaseActor extends Observer
 		component.target = this;
 	}
 	
-	public function addComponent(component:BaseComponent)
+	public function addComponent(component:BaseActorComponent)
 	{
 		//if(component.model != null)
 		//	model.addModel(component.model);
@@ -40,7 +40,7 @@ class BaseActor extends Observer
 		component.target = this;
 	}
 	
-	public function removeComponent(component:BaseComponent)
+	public function removeComponent(component:BaseActorComponent)
 	{
 		componentsList.remove(component);
 		componentsMap.remove(Type.getClassName(Type.getClass(component)));
@@ -48,13 +48,13 @@ class BaseActor extends Observer
 		component.target = null;
 	}
 	
-	public function getComponentAs<T:BaseComponent>(type:String, clazz:Class<T>):Null<T>
+	public function getComponentAs<T:BaseActorComponent>(type:String, clazz:Class<T>):Null<T>
 	{
 		var value = cast componentsMap.get(type);
 		return value;
 	}
 	
-	public function getComponent<T:BaseComponent>(clazz:Class<T>):Null<T>
+	public function getComponent<T:BaseActorComponent>(clazz:Class<T>):Null<T>
 	{
 		var value = cast componentsMap.get(Type.getClassName(clazz));
 		return value;

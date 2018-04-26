@@ -3,7 +3,7 @@ package theater.troupe;
 import theater.events.ActorEvent;
 import theater.troupe.model.AttackModel;
 
-class AttackComponent extends BaseComponent 
+class AttackComponent extends BaseActorComponent 
 {
 	var attackModel:AttackModel;
 	

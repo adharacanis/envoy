@@ -8,6 +8,7 @@ class BaseActorModel
 	public var target:BaseActorModel;
 	
 	public var state:Int = 0;
+	public var deathState:Int = 0;
 	
 	public function new() 
 	{

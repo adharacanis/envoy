@@ -4,7 +4,8 @@ import game.MouseController;
 import game.troupe.SimpleActorFactory;
 import gl.GlStage;
 import theater.events.ActorEvent;
-import theater.scene.ProjectileSceneController;
+import theater.scene.ActorDeathComponent;
+import theater.scene.ProjectileSceneComponent;
 import theater.scene.SimplePhysicSceneComponent;
 import theater.troupe.BaseActor;
 import theater.troupe.model.EnverionmentModel;
@@ -26,14 +27,20 @@ class TestGameSceneController
 		
 		scene = new GameScene(stage);
 		scene.addComponent(new SimplePhysicSceneComponent());
-		scene.addComponent(new ProjectileSceneController(scene));
+		scene.addComponent(new ProjectileSceneComponent(scene));
+		scene.addComponent(new ActorDeathComponent(scene));
 		
 		initialise();
 	}
 	
-	function spawnActor(actor:BaseActor)
+	function onSpawnActor(actor:BaseActor)
 	{
 		scene.addActor(actor);
+	}
+	
+	function onDespawnActor(e:ActorEvent):Void 
+	{
+		scene.removeActor(e.actor);
 	}
 	
 	var player:BaseActor;
@@ -49,15 +56,13 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + 16;
 		positionModel.destinetionPosition.y = 100 + 16;
 		
-		spawnActor(player);
+		onSpawnActor(player);
 		
 		trace('initialise level');
 		
 		bot = spawnBot();
 		bot2 = spawnBot();
 		bot3 = spawnBot();
-		
-		scene.addEventListener(ActorEvent.DEATH, onActorDeath);
 	}
 	
 	var bot:BaseActor;
@@ -76,13 +81,8 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + Math.random() * 300;//positionModel.worldPositionX;
 		positionModel.destinetionPosition.y = 100 + Math.random() * 300;//positionModel.worldPositionY;
 		
-		spawnActor(bot);
+		onSpawnActor(bot);
 		return bot;
-	}
-	
-	private function onActorDeath(e:ActorEvent):Void 
-	{
-		scene.removeActor(e.actor);
 	}
 	
 	public function update(worldStep:WorldStep)

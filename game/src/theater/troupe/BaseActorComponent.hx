@@ -4,7 +4,7 @@ import events.Observer;
 import theater.events.SceneEvent;
 import theater.troupe.model.BaseActorModel;
 
-class BaseComponent extends Observer
+class BaseActorComponent extends Observer
 {
 	public var actor:BaseActor;
 	public var model:BaseActorModel;

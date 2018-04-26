@@ -7,6 +7,7 @@ import theater.troupe.BaseActor;
 import theater.troupe.BaseViewComponent;
 import theater.troupe.LifeTimeComponent;
 import theater.troupe.PositionComponent;
+import theater.troupe.ProjectileDeathComponent;
 import theater.troupe.ProjectileViewComponent;
 import theater.troupe.TargetingComponent;
 import theater.troupe.model.AttackModel;
@@ -83,11 +84,13 @@ class SimpleActorFactory
 		var viewComponent = new ProjectileViewComponent(actor, view);
 		var positionComponent = new PositionComponent(actor);
 		var lifetimeComponent = new LifeTimeComponent(actor);
+		var deathComponent = new ProjectileDeathComponent(actor);
 		//var destructableComponent = new DestructableComponent();
 		
 		actor.addComponentAs(BaseViewComponent, viewComponent);
 		actor.addComponent(positionComponent);
 		actor.addComponent(lifetimeComponent);
+		actor.addComponent(deathComponent);
 		
 		var ownerPositionModel:PositionModel = owner.getModel(PositionModel);
 		

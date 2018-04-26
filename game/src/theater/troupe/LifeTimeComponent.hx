@@ -3,7 +3,7 @@ package theater.troupe;
 import theater.events.ActorEvent;
 import theater.troupe.model.LifeTimeModel;
 
-class LifeTimeComponent extends BaseComponent 
+class LifeTimeComponent extends BaseActorComponent 
 {
 	var lifeTimeModel:LifeTimeModel;
 
@@ -18,7 +18,7 @@ class LifeTimeComponent extends BaseComponent
 	{
 		super.update(worldStep);
 		
-		if (lifeTimeModel.spawnTime + lifeTimeModel.lifeTime <= worldStep.currentTime)
+		if (lifeTimeModel.spawnTime + lifeTimeModel.lifeTime <= worldStep.currentTime && model.deathState == 0)
 		{
 			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor, model));
 		}

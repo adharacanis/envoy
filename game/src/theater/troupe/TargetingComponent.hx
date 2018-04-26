@@ -2,7 +2,7 @@ package theater.troupe;
 
 import theater.troupe.model.EnverionmentModel;
 
-class TargetingComponent extends BaseComponent 
+class TargetingComponent extends BaseActorComponent 
 {
 	var enverionmentModel:EnverionmentModel;
 

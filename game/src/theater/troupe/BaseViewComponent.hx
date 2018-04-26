@@ -2,10 +2,10 @@ package theater.troupe;
 
 import swfdata.DisplayObjectData;
 import theater.events.SceneEvent;
-import theater.troupe.BaseComponent;
+import theater.troupe.BaseActorComponent;
 import theater.troupe.model.PositionModel;
 
-class BaseViewComponent extends BaseComponent 
+class BaseViewComponent extends BaseActorComponent 
 {
 	var positionModel:PositionModel;
 	

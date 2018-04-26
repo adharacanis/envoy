@@ -2,11 +2,13 @@ package theater.scene;
 
 import theater.troupe.BaseActor;
 import theater.troupe.model.PositionModel;
+import theater.scene.SimplePhysicsUtils;
 
 using lime.math.Vector2;
 
 class SimplePhysicSceneComponent extends BaseSceneComponent
 {
+	private var movementStep:Vector2 = new Vector2();
 	
 	public function new() 
 	{
@@ -20,11 +22,11 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 		var speed = model.speed;
 		var step = worldStep.step;
 		
-		var startPosition = model.worldPosition;
-		var destinetionPosition = model.destinetionPosition;
+		var origin = model.worldPosition;
+		var destination = model.destinetionPosition;
 		var direction = model.direction;
 		
-		var distance = destinetionPosition.distance(startPosition);
+		var distance = destination.distance(origin);
 		if (distance == 0)
 		{
 			actor.model.state = 0;
@@ -33,23 +35,12 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 			
 		actor.model.state = 1; 
 		
-		direction.setTo((destinetionPosition.x - startPosition.x) / distance, (destinetionPosition.y - startPosition.y) / distance);
+		direction = SimplePhysicsUtils.calculateDirection(origin, destination, distance, direction);
 		
-		var movementDistance = speed * step;
+		var movementDistance = SimplePhysicsUtils.calculateMovementDistance(speed, step, distance);
+		movementStep = SimplePhysicsUtils.calculateMovementStep(movementDistance, direction, movementStep);
 		
-		if (distance < movementDistance) {
-			movementDistance = distance;
-		}
-		
-		startPosition.x += direction.x * movementDistance;
-		startPosition.y += direction.y * movementDistance;
-	}
-	
-	function calculate()
-	{
-		var x1 = 0;
-		var x2 = 100;
-		
-		//var dx = v * t;
+		origin.x += movementStep.x;
+		origin.y += movementStep.y;
 	}
 }

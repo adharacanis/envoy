@@ -2,7 +2,7 @@ package theater.troupe;
 
 import theater.troupe.model.DestructableModel;
 
-class DestructableComponent extends BaseComponent 
+class DestructableComponent extends BaseActorComponent 
 {
 	var descturctableModel:DestructableModel;
 	
