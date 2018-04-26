@@ -23,7 +23,7 @@ class SimplePhysicsUtils
 		var movementDistance = SimplePhysicsUtils.calculateMovementDistance(speed, step, distance);
 		
 		output.x = origin.x + direction.x * movementDistance;
-		output.x = origin.y + direction.x * movementDistance;
+		output.y = origin.y + direction.y * movementDistance;
 		
 		return output;
 	}

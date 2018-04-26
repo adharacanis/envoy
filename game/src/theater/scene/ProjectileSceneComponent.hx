@@ -28,13 +28,13 @@ class ProjectileSceneComponent extends BaseSceneComponent
 		
 		var projectilePositionModel = e.actorModel.getModel(PositionModel);
 		
-		var destinetionPosition = targetPositionModel.worldPosition;
+		var destinetionPosition = targetPositionModel.worldPosition.clone();
 		var startPosition = projectilePositionModel.worldPosition;
 		var direction2 = projectilePositionModel.direction;
 		var distance = destinetionPosition.distance(startPosition);
 		
 		var movementTime = distance / projectilePositionModel.speed;
-		var targetDestinationPosition = SimplePhysicsUtils.calculateNextPosition(targetPositionModel.worldPosition, targetPositionModel.destinetionPosition, targetPositionModel.direction, targetPositionModel.speed, movementTime, destinetionPosition);
+		SimplePhysicsUtils.calculateNextPosition(targetPositionModel.worldPosition, targetPositionModel.destinetionPosition, targetPositionModel.direction, targetPositionModel.speed, movementTime, destinetionPosition);
 		distance = destinetionPosition.distance(startPosition);
 		
 		var direction = new Vector2((destinetionPosition.x - startPosition.x) / distance, (destinetionPosition.y - startPosition.y) / distance);

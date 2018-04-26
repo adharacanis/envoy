@@ -61,8 +61,8 @@ class TestGameSceneController
 		trace('initialise level');
 		
 		bot = spawnBot();
-		bot2 = spawnBot();
-		bot3 = spawnBot();
+		//bot2 = spawnBot();
+		//bot3 = spawnBot();
 	}
 	
 	var bot:BaseActor;
@@ -89,8 +89,8 @@ class TestGameSceneController
 	{
 		if (bot != null && bot.model.state == 0)
 		{
-			bot.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
-			bot.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+			//bot.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			//bot.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
 		}
 		
 		if (bot2 != null && bot2.model.state == 0)
