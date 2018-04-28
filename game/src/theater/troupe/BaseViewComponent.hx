@@ -30,7 +30,7 @@ class BaseViewComponent extends BaseActorComponent
 	var currentAngle:Float = 0;
 	override public function update(worldStep:WorldStep) 
 	{
-		setPosition();
+		
 		
 		var theta = Math.atan2(-positionModel.direction.x, -positionModel.direction.y);
 		
@@ -40,6 +40,8 @@ class BaseViewComponent extends BaseActorComponent
 		view.transform.rotate(currentAngle-theta);
 		currentAngle = theta;
 		
+		setPosition();
+		
 		super.update(worldStep);
 	}
 	
@@ -47,6 +49,9 @@ class BaseViewComponent extends BaseActorComponent
 	{
 		view.x = (view.x + positionModel.worldPosition.x) / 2;
 		view.y = (view.y + positionModel.worldPosition.y) / 2;
+		
+		view.x = positionModel.worldPosition.x;
+		view.y = positionModel.worldPosition.y;
 	}
 	
 }

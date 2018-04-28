@@ -10,9 +10,9 @@ class ProjectileViewComponent extends BaseViewComponent
 	}
 	
 	override public function update(worldStep:WorldStep) 
-	{
-		super.update(worldStep);
-		
+	{	
 		view.transform.rotate(Math.PI / 3.6);
+		
+		setPosition();
 	}
 }

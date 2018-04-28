@@ -23,8 +23,6 @@ class ProjectileDeathComponent extends BaseActorComponent
 		//apply damage
 		//despawn projectile
 		
-		trace('register particle death');
-		
 		model.deathState = 1;
 		
 		dispatchEvent(new ActorEvent(ActorEvent.DESPAWN, actor, model));

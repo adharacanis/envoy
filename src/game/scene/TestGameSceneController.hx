@@ -7,6 +7,7 @@ import theater.events.ActorEvent;
 import theater.scene.ActorDeathComponent;
 import theater.scene.ProjectileSceneComponent;
 import theater.scene.SimplePhysicSceneComponent;
+import theater.scene.TargetCameraComponent;
 import theater.troupe.BaseActor;
 import theater.troupe.model.EnverionmentModel;
 import theater.troupe.model.PositionModel;
@@ -17,6 +18,7 @@ class TestGameSceneController
 	
 	var scene:GameScene;
 	var mouseController:MouseController;
+	var cameraController:theater.scene.TargetCameraComponent;
 	
 	public function new(stage:GlStage, assetsManager:AssetsManager) 
 	{
@@ -29,6 +31,8 @@ class TestGameSceneController
 		scene.addComponent(new SimplePhysicSceneComponent());
 		scene.addComponent(new ProjectileSceneComponent(scene));
 		scene.addComponent(new ActorDeathComponent(scene));
+		cameraController = new TargetCameraComponent(scene.camera);
+		scene.addComponent(cameraController);
 		
 		initialise();
 	}
@@ -56,13 +60,17 @@ class TestGameSceneController
 		positionModel.destinetionPosition.x = 100 + 16;
 		positionModel.destinetionPosition.y = 100 + 16;
 		
+		cameraController.target = player;
+		
+		
+		
 		onSpawnActor(player);
 		
 		trace('initialise level');
 		
 		bot = spawnBot();
-		//bot2 = spawnBot();
-		//bot3 = spawnBot();
+		bot2 = spawnBot();
+		bot3 = spawnBot();
 	}
 	
 	var bot:BaseActor;
@@ -95,14 +103,14 @@ class TestGameSceneController
 		
 		if (bot2 != null && bot2.model.state == 0)
 		{
-			bot2.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
-			bot2.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+			//bot2.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			//bot2.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
 		}
 		
 		if (bot3 != null && bot3.model.state == 0)
 		{
-			bot3.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
-			bot3.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
+			//bot3.model.getModel(PositionModel).destinetionPosition.x = 800 * Math.random();
+			//bot3.model.getModel(PositionModel).destinetionPosition.y = 800 * Math.random();
 		}
 		
 		scene.update(worldStep);
