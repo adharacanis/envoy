@@ -26,6 +26,8 @@ import swfparser.SwfParserLight;
 
 class AssetsManager extends EventDispatcher
 {
+	public static var instance:AssetsManager;
+	
 	var assetsStorage:AssetsStorage;
 	var textureStorage:TextureStorage;
 	var textureManager:TextureManager;
@@ -39,6 +41,8 @@ class AssetsManager extends EventDispatcher
 	public function new(textureStorage:TextureStorage, textureManager:TextureManager)
 	{
 		super();
+		
+		instance = this;
 		
 		this.textureManager = textureManager;
 		this.textureStorage = textureStorage;
@@ -82,16 +86,23 @@ class AssetsManager extends EventDispatcher
 	
 	public function createDefaultTexture()
 	{
-		var padding:Float = 5;
+		var padding:Float = 16;
+		var texturePadding:Float = 4;
 		
-		var bitmap:BitmapData = new BitmapData(64, 64, true, 0);
+		var bitmap:BitmapData = new BitmapData(256, 256, true, 0);
 		var z = 0.5;
 		bitmap.fillRect(new Rectangle(padding-z, padding-z, 32+z*2, 32+z*2), 0x55FF0000);
 		bitmap.fillRect(new Rectangle(padding, padding, 32, 32), 0xFFFF0000);
 		
 		bitmap.fillRect(new Rectangle(padding - z + 32 / 2, padding - z + (32 / 2 - 4), 32 / 2, 8 + z), 0xFF00FF00);
 		
-		var textureSource = new TextureSource(bitmap, 64, 64, textureManager);
+		
+		bitmap.fillRect(new Rectangle(padding + 32 + padding, padding, 32, 32), 0xFF00FF00);
+		
+		bitmap.fillRect(new Rectangle(padding + 32 + padding-z, padding + 32 + padding-z, 32+z*2, 32+z*2), 0xFFFF0000);
+		bitmap.fillRect(new Rectangle(padding + 32 + padding, padding + 32 + padding, 32, 32), 0xFF00FF00);
+		
+		var textureSource = new TextureSource(bitmap, 256, 256, textureManager);
 		
 		textureSource.createGlData(Context3DTextureFormat.BGRA);
 		textureSource.uploadToGpu();
@@ -105,6 +116,24 @@ class AssetsManager extends EventDispatcher
 		textureStorage.putTexture(combinedTextureId, texture);
 		
 		linkagesMap["default"] = shape;
+		
+		var combinedTextureId = new TextureId(0, 1);
+		var shape = new ShapeData(combinedTextureId, new Rectangle(-(texturePadding + 16), -(texturePadding + 16), 32, 32));
+		shape.transform = new Matrix();
+		
+		var texture:GLSubTexture = new GLSubTexture(1, new Rectangle(32 + padding * 2 - texturePadding, 32 + padding * 2 - texturePadding, 32 + texturePadding * 2, 32 + texturePadding * 2), new TextureTransform(1, 1, 0, 0), textureSource, 0, Context3DTextureFormat.BGRA);
+		textureStorage.putTexture(combinedTextureId, texture);
+		
+		linkagesMap["default#2"] = shape;
+		
+		var combinedTextureId = new TextureId(0, 2);
+		var shape = new ShapeData(combinedTextureId, new Rectangle(-(texturePadding + 16), -(texturePadding + 16), 32, 32));
+		shape.transform = new Matrix();
+		
+		var texture:GLSubTexture = new GLSubTexture(2, new Rectangle(32 + padding * 2 - texturePadding, padding - texturePadding, 32 + texturePadding * 2, 32 + texturePadding * 2), new TextureTransform(1, 1, 0, 0), textureSource, 0, Context3DTextureFormat.BGRA);
+		textureStorage.putTexture(combinedTextureId, texture);
+		
+		linkagesMap["default#1"] = shape;
 		
 		return shape;
 	}

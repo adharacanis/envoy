@@ -1,8 +1,6 @@
 package;
 
-import game.scene.TestGameSceneController;
 import gl.GlStage;
-import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.display3D.Context3D;
 import openfl.display3D.Context3DCompareMode;
@@ -12,6 +10,7 @@ import openfl.events.Event;
 import renderer.Renderer;
 import renderer.TextureManager;
 import swfdata.atlas.TextureStorage;
+import theater.scene.TestGameSceneController;
 
 @:access(openfl.display3D.Context3D)
 class Main extends Sprite
@@ -21,7 +20,7 @@ class Main extends Sprite
 	
 	var assetsManager:AssetsManager;
 	
-	var gameContorller:game.scene.TestGameSceneController;
+	var gameContorller:theater.scene.TestGameSceneController;
 	
 	public function new() 
 	{
@@ -38,9 +37,9 @@ class Main extends Sprite
 		//this.graphics.lineStyle(2, 0xFF0000);
 		//	this.graphics.drawRect(100, 100, 100, 100);
 		
-		var _fps = new FPS(10,10,0xffffff);
-		_fps.y = 40;
-		stage.addChild(_fps);
+		//var _fps = new FPS(10,10,0xffffff);
+		//_fps.y = 40;
+		//stage.addChild(_fps);
 	}
 	
 	private function initialize(e:Event = null):Void 
@@ -106,6 +105,6 @@ class Main extends Sprite
 		if (worldTime != null)
 			worldTime.updateTime();
 			
-		gameContorller.update(worldTime.worldStep);
+		gameContorller.update();
 	}
 }
