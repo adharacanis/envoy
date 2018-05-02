@@ -4,12 +4,33 @@ import lime.math.Vector2;
 
 using lime.math.Vector2;
 
+typedef TwoDimensionVector = {
+	public var x:Float;
+	public var y:Float;
+}
+
 class SimplePhysicsUtils 
 {
 
 	public function new() 
 	{
 		
+	}
+	
+	inline static public function inRadius(radius:Float, appliationPoint:TwoDimensionVector, interestPoint:TwoDimensionVector):Bool
+	{
+		return distance(appliationPoint, interestPoint) < radius;
+	}
+	
+	inline static public function distance(point1:TwoDimensionVector, point2:TwoDimensionVector):Float
+	{
+		var pow1:Float = (point1.x - point2.x);
+		pow1 *= pow1;
+		
+		var pow2:Float = (point1.y - point2.y);
+		pow2 *= pow2;
+		
+		return Math.sqrt(pow1 + pow2);
 	}
 	
 	inline static public function calculateNextPosition(origin:Vector2, destination:Vector2, direction:Vector2, speed:Float, step:Float, output:Vector2)

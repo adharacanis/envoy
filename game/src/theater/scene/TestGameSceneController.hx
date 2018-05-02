@@ -19,7 +19,7 @@ class TestGameSceneController
 	
 	var scene:GameScene;
 	var mouseController:MouseController;
-	var cameraController:theater.scene.TargetCameraComponent;
+	var cameraController:TargetCameraComponent;
 	
 	public function new(stage:GlStage, assetsManager:AssetsManager) 
 	{
