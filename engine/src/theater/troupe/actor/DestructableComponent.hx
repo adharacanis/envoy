@@ -1,5 +1,6 @@
 package theater.troupe.actor;
 
+import theater.events.ActorEvent;
 import theater.troupe.actor.BaseActorComponent;
 import theater.troupe.actor.model.DestructableModel;
 
@@ -7,17 +8,25 @@ class DestructableComponent extends BaseActorComponent
 {
 	var descturctableModel:DestructableModel;
 	
-	public function new() 
+	public function new(actor:BaseActor = null) 
 	{
-		super(new DestructableModel());
-		descturctableModel = Lang.as2(model, DestructableModel);
+		super(actor);
+		
+		descturctableModel = model.getModel(DestructableModel);
+	}
+	
+	override function initialize() 
+	{
+		super.initialize();
+		
+		
 	}
 	
 	override public function update(worldStep:WorldStep) 
 	{
-		super.update(worldStep);
-		
-		//if (descturctableModel.currentHealth <= descturctableModel.maxHealth)
-		//	trace('destruction');
+		if (descturctableModel.currentHealth <= descturctableModel.maxHealth && model.deathState != 1)
+		{
+			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor, model));
+		}
 	}
 }

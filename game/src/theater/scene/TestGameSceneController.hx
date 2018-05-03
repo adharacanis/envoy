@@ -33,6 +33,7 @@ class TestGameSceneController
 		scene.addComponent(new ProjectileSceneComponent(scene));
 		scene.addComponent(new ActorDeathComponent(scene));
 		scene.addComponent(new EffectSceneComponent(scene));
+		scene.addComponent(new DamageSceneComponent(scene, scene.actorsList));
 		cameraController = new TargetCameraComponent(scene.camera);
 		scene.addComponent(cameraController);
 		

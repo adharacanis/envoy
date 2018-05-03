@@ -8,6 +8,7 @@ import theater.troupe.actor.model.BaseActorModel;
 import theater.troupe.actor.model.EnverionmentModel;
 import theater.troupe.actor.model.LifeTimeModel;
 import theater.troupe.actor.model.PositionModel;
+import theater.troupe.actor.model.ProjectileModel;
 import theater.troupe.effect.SimpleProjectileImpactEffect;
 
 class SimpleActorFactory 
@@ -64,10 +65,13 @@ class SimpleActorFactory
 		var actorModel = new BaseActorModel();
 		var positionModel = new PositionModel();
 		var lifetimeModel = new LifeTimeModel();
+		var projectileModel = new ProjectileModel();
+		
 		lifetimeModel.lifeTime = 4000;
 		
 		actorModel.addModel(positionModel);
 		actorModel.addModel(lifetimeModel);
+		actorModel.addModel(projectileModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default#2").clone();
 		view.scaleX = view.scaleY = 0.5;
