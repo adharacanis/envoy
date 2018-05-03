@@ -2,6 +2,7 @@ package theater.scene;
 import lime.math.Vector2;
 import theater.events.ActorEvent;
 import theater.troupe.actor.BaseActor;
+import theater.troupe.actor.model.DestructableModel;
 import theater.troupe.actor.model.PositionModel;
 import theater.troupe.actor.model.ProjectileModel;
 
@@ -42,7 +43,8 @@ class DamageSceneComponent extends BaseSceneComponent
 	
 	inline public function applyDamage(actor:BaseActor) 
 	{
-		trace('apply damage, ${actor.id}');
+		//trace('apply damage, ${actor.id}');
+		actor.model.getModel(DestructableModel).currentHealth -= 25;
 	}
 	
 	private function onApplyDamage(e:ActorEvent):Void 

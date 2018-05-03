@@ -18,15 +18,19 @@ class DestructableComponent extends BaseActorComponent
 	override function initialize() 
 	{
 		super.initialize();
-		
-		
 	}
 	
-	override public function update(worldStep:WorldStep) 
+	override public function update() 
 	{
-		if (descturctableModel.currentHealth <= descturctableModel.maxHealth && model.deathState != 1)
+		if (model.deathState == 1) return;
+		if (descturctableModel.currentHealth <= 0)
 		{
+			model.deathState = 1;
 			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor, model));
+		}
+		else
+		{
+			
 		}
 	}
 }

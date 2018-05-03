@@ -5,6 +5,7 @@ import renderer.BlendMode;
 import swfdata.DisplayObjectData;
 import theater.troupe.actor.model.AttackModel;
 import theater.troupe.actor.model.BaseActorModel;
+import theater.troupe.actor.model.DestructableModel;
 import theater.troupe.actor.model.EnverionmentModel;
 import theater.troupe.actor.model.LifeTimeModel;
 import theater.troupe.actor.model.PositionModel;
@@ -26,12 +27,14 @@ class SimpleActorFactory
 		var positionModel = new PositionModel();
 		var attackModle = new AttackModel();
 		var enverionmentModel = new EnverionmentModel();
+		var destructableModel = new DestructableModel();
 		
 		attackModle.attackCooldown = 750 + Math.random() * 500;
 		
 		actorModel.addModel(positionModel);
 		actorModel.addModel(attackModle);
 		actorModel.addModel(enverionmentModel);
+		actorModel.addModel(destructableModel);
 		
 		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
 		
@@ -42,12 +45,14 @@ class SimpleActorFactory
 		var positionComponent = new PositionComponent(actor);
 		var attackComponent = new AttackComponent(actor);
 		var targetingComponent = new TargetingComponent(actor);
+		var destructableComponent = new DestructableComponent(actor);
 		
 		
 		actor.addComponent(viewComponent);
 		actor.addComponent(positionComponent);
 		actor.addComponent(attackComponent);
 		actor.addComponent(targetingComponent);
+		actor.addComponent(destructableComponent);
 		
 		positionModel.speed = 350;
 		
