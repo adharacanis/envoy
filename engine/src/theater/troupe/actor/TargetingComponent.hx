@@ -21,12 +21,28 @@ class TargetingComponent extends BaseActorComponent
 	{
 		super.update();
 		
-		var target = enverionmentModel.actorsInRange[0];
+		if (model.target != null) return;
 		
-		if (target == null) return;
-		if (SimplePhysicsUtils.distance(target.getModel(PositionModel).worldPosition, model.getModel(PositionModel).worldPosition) > 700) 
-			model.target = null;
-		else
-			model.target = target;
+		model.target = null;
+		var myPosition = model.getModel(PositionModel).worldPosition;
+		var actorsList = enverionmentModel.actorsInRange;
+		var lastDistance:Float = 9999999;
+		for (i in 0...actorsList.length)
+		{
+			var currentActor = actorsList[i];
+			
+			if (currentActor.type == 3 || currentActor.type == 2) continue;
+			if (currentActor == actor) continue;
+			if (currentActor.model.deathState == 1) continue;
+			
+			var targetPosition = currentActor.model.getModel(PositionModel).worldPosition;
+			var distance = SimplePhysicsUtils.distance(targetPosition, myPosition);
+			
+			if (distance > 700) continue;
+			if (distance >= lastDistance) continue;
+			
+			model.target = currentActor.model;
+			lastDistance = distance;
+		}
 	}
 }

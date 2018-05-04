@@ -10,6 +10,7 @@ class BaseScene extends Observer
 	public var actorsList:Array<BaseActor>;
 	
 	var componentsList:Array<BaseSceneComponent>;
+	var itirableComponentsList:Array<IItirableSceneComponent>;
 	
 	public function new(target:IObserver = null) 
 	{
@@ -17,11 +18,15 @@ class BaseScene extends Observer
 		
 		actorsList = [];
 		componentsList = [];
+		itirableComponentsList = [];
 	}
 	
 	public function addComponent(sceneComponent:BaseSceneComponent)
 	{
-		componentsList.push(sceneComponent);
+		if (Std.is(sceneComponent, IItirableSceneComponent))
+			itirableComponentsList.push(cast sceneComponent);
+		else
+			componentsList.push(sceneComponent);
 	}
 	
 	public function addActor(actor:BaseActor)
@@ -41,7 +46,7 @@ class BaseScene extends Observer
 	{
 		for (actor in actorsList)
 		{
-			for (sceneComponent in componentsList)
+			for (sceneComponent in itirableComponentsList)
 				sceneComponent.update(actor);
 				
 			actor.update();

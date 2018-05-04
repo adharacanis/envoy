@@ -22,7 +22,7 @@ class BaseActorModel
 		modelsMap.set(Type.getClassName(Type.getClass(model)), model);
 	}
 	
-	public function getModel<T:BaseActorModel>(clazz:Class<T>):Null<T>
+	public function getModel<T:BaseActorModel>(clazz:Class<T>):T
 	{
 		var value = cast modelsMap.get(Type.getClassName(clazz));
 		return value;

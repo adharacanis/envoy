@@ -24,7 +24,7 @@ class AttackComponent extends BaseActorComponent
 		if (target != null && checkCooldown(attackModel) && model.target.deathState == 0 && SimplePhysicsUtils.distance(target.getModel(PositionModel).worldPosition, model.getModel(PositionModel).worldPosition) <= attackModel.attackRange)
 		{
 			attackModel.lastAttackTime = worldStep.currentTime;
-			dispatchEvent(new ActorEvent(ActorEvent.ATTACK, actor, model));
+			dispatchEvent(new ActorEvent(ActorEvent.ATTACK, actor));
 		}
 	}
 	

@@ -5,7 +5,6 @@ import flash.display.SpreadMethod;
 import gl.GlStage;
 import openfl.events.MouseEvent;
 import theater.events.ActorEvent;
-import theater.scene.ActorDeathComponent;
 import theater.scene.ProjectileSceneComponent;
 import theater.scene.SimplePhysicSceneComponent;
 import theater.scene.TargetCameraComponent;
@@ -68,6 +67,10 @@ class TestGameSceneController
 		player = SimpleActorFactory.makeSimpleActor();
 		player.type = 0;
 		player.model.getModel(PositionModel).speed -= 2;
+		
+		var envModel:EnverionmentModel = player.model.getModel(EnverionmentModel);
+		envModel.actorsInRange = scene.actorsList;
+		
 		mouseController.setPlayerData(player.model);
 		
 		var positionModel = player.model.getModel(PositionModel);
@@ -85,8 +88,12 @@ class TestGameSceneController
 		
 		trace('initialise level');
 		
-		for(i in 0...50)
+		for(i in 0...1)
 			bot = spawnBot();
+			
+		bot = spawnBot();
+		var positionModel = bot.model.getModel(PositionModel);
+		positionModel.setPosition(400, -400);
 		
 		//bot3 = spawnBot();
 		//bot3 = spawnBot();
@@ -101,14 +108,11 @@ class TestGameSceneController
 	{
 		var bot = SimpleActorFactory.makeBotActor();
 		var envModel:EnverionmentModel = bot.model.getModel(EnverionmentModel);
-		envModel.actorsInRange.push(player.model);
+		envModel.actorsInRange = scene.actorsList;
 		
 		var positionModel = bot.model.getModel(PositionModel);
-		positionModel.worldPosition.x = -1600 + Math.random() * 3200;
-		positionModel.worldPosition.y = -1600 + Math.random() * 3200;
-		
-		positionModel.destinetionPosition.x = positionModel.worldPosition.x;
-		positionModel.destinetionPosition.y = positionModel.worldPosition.y;
+		positionModel.setPosition(400, 400);
+		//positionModel.setPosition(-1600 + Math.random() * 3200, -1600 + Math.random() * 3200);
 		
 		spawn(bot);
 		return bot;

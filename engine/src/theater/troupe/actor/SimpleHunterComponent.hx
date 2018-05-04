@@ -9,6 +9,8 @@ class SimpleHunterComponent extends BaseActorComponent
 {
 	var attackModel:AttackModel;
 	var positionModel:PositionModel;
+	
+	var anchorn:Vector2;
 
 	public function new(actor:BaseActor) 
 	{
@@ -27,43 +29,54 @@ class SimpleHunterComponent extends BaseActorComponent
 		
 		var target = model.target;
 		
-		if (target == null) return;
-		
-		var targetPositionModel = target.getModel(PositionModel);
-		
-		var range = attackModel.attackRange;
-		var direction:Vector2 = positionModel.direction;
 		var currentPosition:Vector2 = positionModel.worldPosition;
-		var targetPosition:Vector2 = targetPositionModel.worldPosition;
-		var distance = SimplePhysicsUtils.distance(currentPosition, targetPosition); 
 		
-		SimplePhysicsUtils.calculateDirection(currentPosition, targetPosition, distance, direction);
-		
-		var r = rr;
-		if (distance > range + 15)
+		if (target == null) 
 		{
-			r = rr + Math.cos(ii) / 10;
-			
+			if (anchorn == null)
+				anchorn = currentPosition.clone();
+				
+			if (actor.model.state == 1) 
+			{
+				//positionModel.destinetionPosition.setTo(anchorn.x + Math.random() * 150, anchorn.y + Math.random() * 150);
+			}
 		}
-		ii += 0.05;
-		
-		//if (distance > range) 
+		else
 		{
-			SimplePhysicsUtils.calculateMovementStep(range-15, direction, positionModel.destinetionPosition);
+			var targetPositionModel = target.getModel(PositionModel);
 			
+			var range = attackModel.attackRange;
+			var direction:Vector2 = positionModel.direction;
+			var targetPosition:Vector2 = targetPositionModel.worldPosition;
+			var distance = SimplePhysicsUtils.distance(currentPosition, targetPosition); 
 			
+			SimplePhysicsUtils.calculateDirection(currentPosition, targetPosition, distance, direction);
 			
-			var x = positionModel.destinetionPosition.x;
-			var y = positionModel.destinetionPosition.y;
-			positionModel.destinetionPosition.x = Math.cos(r) * x - Math.sin(r) * y;
-			positionModel.destinetionPosition.y = Math.cos(r) * y + Math.sin(r) * x;
+			var r = rr;
+			if (distance > range + 15)
+			{
+				r = rr + Math.cos(ii) / 10;
+				
+			}
+			ii += 0.05;
 			
-			
-			
-			positionModel.destinetionPosition.x = targetPosition.x - positionModel.destinetionPosition.x;
-			positionModel.destinetionPosition.y = targetPosition.y - positionModel.destinetionPosition.y;
-			
-			
+			//if (distance > range) 
+			{
+				SimplePhysicsUtils.calculateMovementStep(range-15, direction, positionModel.destinetionPosition);
+				
+				
+				
+				var x = positionModel.destinetionPosition.x;
+				var y = positionModel.destinetionPosition.y;
+				
+				//positionModel.destinetionPosition.setTo(Math.cos(r) * x - Math.sin(r) * y, Math.cos(r) * y + Math.sin(r) * x);
+				positionModel.destinetionPosition.setTo(x, y);
+				
+				
+				
+				positionModel.destinetionPosition.x = targetPosition.x - positionModel.destinetionPosition.x;
+				positionModel.destinetionPosition.y = targetPosition.y - positionModel.destinetionPosition.y;
+			}
 		}
 	}
 }

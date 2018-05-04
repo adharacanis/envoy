@@ -1,9 +1,10 @@
 package theater.scene;
+
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.BaseViewComponent;
 import theater.troupe.actor.model.PositionModel;
 
-class TargetCameraComponent extends BaseSceneComponent 
+class TargetCameraComponent extends BaseItirableSceneComponent 
 {
 	public var target:BaseActor;
 	var camera:Camera;

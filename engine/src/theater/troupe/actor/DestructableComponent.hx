@@ -25,8 +25,9 @@ class DestructableComponent extends BaseActorComponent
 		if (model.deathState == 1) return;
 		if (descturctableModel.currentHealth <= 0)
 		{
+			trace('destroyed actor out of health ${actor.id}');
 			model.deathState = 1;
-			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor, model));
+			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor));
 		}
 		else
 		{

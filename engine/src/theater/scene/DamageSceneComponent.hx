@@ -1,5 +1,5 @@
 package theater.scene;
-import lime.math.Vector2;
+
 import theater.events.ActorEvent;
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.model.DestructableModel;
@@ -14,6 +14,7 @@ class DamageSceneComponent extends BaseSceneComponent
 	public function new(scene:BaseScene, actorsList:Array<BaseActor>) 
 	{
 		super();
+		
 		this.scene = scene;
 		this.actorsList = actorsList;
 		
@@ -22,18 +23,15 @@ class DamageSceneComponent extends BaseSceneComponent
 	
 	public function applyDamageInRadius(radius:Float, damageSource:BaseActor)
 	{
+		
 		var objectsInRaius:Array<BaseActor> = [];
 		var positionModel = damageSource.model.getModel(PositionModel);
 		var applicationPoint = positionModel.worldPosition;
 		
 		for (actor in actorsList)
 		{
-			if (actor == damageSource) continue;
-			if (actor.type == 3 || damageSource.type == 3) continue;
-			if (actor.id == damageSource.id) continue;
-			if (actor.type == 2 && damageSource.type == 1) continue;
-			if (actor.type == 1 && damageSource.type == 2) continue;
-			if (actor.type == 2 && damageSource.type == 2) continue;
+			if (SimplePhysicsUtils.filter(actor, damageSource)) continue;
+			
 			if (SimplePhysicsUtils.inRadius(radius, applicationPoint, actor.model.getModel(PositionModel).worldPosition))
 			{
 				applyDamage(actor);
@@ -43,17 +41,17 @@ class DamageSceneComponent extends BaseSceneComponent
 	
 	inline public function applyDamage(actor:BaseActor) 
 	{
-		//trace('apply damage, ${actor.id}');
 		actor.model.getModel(DestructableModel).currentHealth -= 25;
 	}
 	
 	private function onApplyDamage(e:ActorEvent):Void 
 	{
-		var model = e.actorModel.getModel(ProjectileModel);
+		var actor = e.actor;
+		var model = actor.model.getModel(ProjectileModel);
 		
 		if (model.damageRadius > 1)
 		{
-			applyDamageInRadius(model.damageRadius, e.actor);
+			applyDamageInRadius(model.damageRadius, actor);
 		}
 	}
 }

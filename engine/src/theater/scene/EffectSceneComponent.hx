@@ -1,4 +1,5 @@
 package theater.scene;
+
 import theater.events.ActorEvent;
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.SimpleActorFactory;
@@ -25,10 +26,5 @@ class EffectSceneComponent extends BaseSceneComponent
 	{
 		var effect = SimpleActorFactory.makeEffect(e.actor);
 		scene.addActor(effect);
-	}
-	
-	override public function update(actor:BaseActor) 
-	{
-		super.update(actor);
 	}
 }

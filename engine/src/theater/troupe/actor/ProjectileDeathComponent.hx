@@ -30,8 +30,8 @@ class ProjectileDeathComponent extends BaseActorComponent
 		{
 			model.deathState = 1;
 			
-			dispatchEvent(new ActorEvent(ActorEvent.PROJECTILE_APPLY_DAMAGE, actor, model));
-			dispatchEvent(new ActorEvent(ActorEvent.DESPAWN, actor, model));
+			dispatchEvent(new ActorEvent(ActorEvent.PROJECTILE_APPLY_DAMAGE, actor));
+			dispatchEvent(new ActorEvent(ActorEvent.DESPAWN, actor));
 		}
 	}
 }

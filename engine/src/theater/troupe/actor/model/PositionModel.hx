@@ -21,4 +21,10 @@ class PositionModel extends BaseActorModel
 		this.y = y;
 	}
 	
+	public function setPosition(x:Float, y:Float)
+	{
+		destinetionPosition.setTo(x, y);
+		worldPosition.setTo(x, y);
+	}
+	
 }

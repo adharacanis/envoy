@@ -2,7 +2,6 @@ package theater.events;
 
 import events.Event;
 import theater.troupe.actor.BaseActor;
-import theater.troupe.actor.model.BaseActorModel;
 
 class ActorEvent extends Event 
 {
@@ -16,15 +15,13 @@ class ActorEvent extends Event
 	
 	static public inline var PROJECTILE_APPLY_DAMAGE:String = "onProjectileApplyDamage";
 	
-	public var actorModel:BaseActorModel;
 	public var actor:BaseActor;
 
-	public function new(type:String, actor:BaseActor, actorModel:BaseActorModel) 
+	public function new(type:String, actor:BaseActor) 
 	{
 		super(type);
 		
-		this.actor = actor;
-		this.actorModel = actorModel;	
+		this.actor = actor;	
 	}
 	
 }

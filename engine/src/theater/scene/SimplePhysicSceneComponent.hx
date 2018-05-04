@@ -1,15 +1,14 @@
 package theater.scene;
 
+import lime.math.Vector2;
 import openfl.geom.Rectangle;
 import theater.events.ActorEvent;
+import theater.scene.SimplePhysicsUtils;
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.BaseViewComponent;
 import theater.troupe.actor.model.PositionModel;
-import theater.scene.SimplePhysicsUtils;
 
-using lime.math.Vector2;
-
-class SimplePhysicSceneComponent extends BaseSceneComponent
+class SimplePhysicSceneComponent extends BaseItirableSceneComponent
 {
 	var movementStep:Vector2 = new Vector2();
 	var collisionList:Array<BaseActor> = [];
@@ -40,7 +39,7 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 		var destination = model.destinetionPosition;
 		var direction = model.direction;
 		
-		var distance = destination.distance(origin);
+		var distance = SimplePhysicsUtils.distance(destination, origin);
 		if (distance == 0)
 		{
 			actor.model.state = 0;
@@ -62,12 +61,7 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 	var b:Rectangle = new Rectangle();
 	function checkColission(actorA:BaseActor, actorB:BaseActor) 
 	{
-		if (actorA == actorB) return;
-		if (actorA.type == 3 || actorB.type == 3) return;
-		if (actorA.id == actorB.id) return;
-		if (actorA.type == 2 && actorB.type == 1) return;
-		if (actorA.type == 1 && actorB.type == 2) return;
-		if (actorA.type == 2 && actorB.type == 2) return;
+		if (SimplePhysicsUtils.filter(actorA, actorB)) return;
 			
 		var viewComponentA = actorA.getComponent(BaseViewComponent);
 		var viewComponentB = actorB.getComponent(BaseViewComponent);
@@ -83,8 +77,8 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 		
 		if (a.intersects(b))
 		{
-			actorA.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorA, actorA.model));
-			actorB.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorB, actorB.model));
+			actorA.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorA));
+			actorB.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorB));
 		}
 	}
 }

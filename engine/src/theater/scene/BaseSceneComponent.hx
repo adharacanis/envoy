@@ -10,9 +10,4 @@ class BaseSceneComponent
 	{
 		
 	}
-	
-	public function update(actor:BaseActor)
-	{
-		
-	}
 }

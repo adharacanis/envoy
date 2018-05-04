@@ -36,7 +36,7 @@ class LifeTimeComponent extends BaseActorComponent
 		if (lifeTimeModel.partOfComplete == 1 && !lifeTimeModel.isComplete)
 		{
 			lifeTimeModel.isComplete = true;
-			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor, model));
+			dispatchEvent(new ActorEvent(ActorEvent.DEATH, actor));
 		}
 	}
 }

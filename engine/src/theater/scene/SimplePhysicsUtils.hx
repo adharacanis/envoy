@@ -1,6 +1,7 @@
 package theater.scene;
 
 import lime.math.Vector2;
+import theater.troupe.actor.BaseActor;
 
 using lime.math.Vector2;
 
@@ -17,6 +18,37 @@ class SimplePhysicsUtils
 		
 	}
 	
+	inline static public function filter(actorA:BaseActor, actorB:BaseActor)
+	{
+		/*
+		if (actor == damageSource) continue;
+		if (actor.type == 3 || damageSource.type == 3) continue;
+		if (actor.id == damageSource.id) continue;
+		if (actor.type == 2 && damageSource.type == 1) continue;
+		if (actor.type == 1 && damageSource.type == 2) continue;
+		if (actor.type == 2 && damageSource.type == 2) continue;
+		*/
+		/*
+		if (actorA == actorB) return;
+		if (actorA.type == 3 || actorB.type == 3) return;
+		if (actorA.id == actorB.id) return;
+		if (actorA.type == 2 && actorB.type == 1) return;
+		if (actorA.type == 1 && actorB.type == 2) return;
+		if (actorA.type == 2 && actorB.type == 2) return;
+		*/
+		
+		return if (actorA == actorB) true;
+		else if (actorA.type == 3 || actorB.type == 3) true;
+		else if (actorA.id == actorB.id) true;
+		//if (actorA.type == 2 && actorB.type == 1) false;
+		//if (actorA.type == 1 && actorB.type == 2) false;
+		else if (actorA.type == 2 && actorB.type == 2) true;
+		//if (actorA.type == 0 && actorB.type == 2) true;
+		//if (actorA.type == 2 && actorB.type == 0) true;
+		
+		else return false;
+	}
+	
 	inline static public function inRadius(radius:Float, appliationPoint:TwoDimensionVector, interestPoint:TwoDimensionVector):Bool
 	{
 		return distance(appliationPoint, interestPoint) < radius;
@@ -24,13 +56,13 @@ class SimplePhysicsUtils
 	
 	inline static public function distance(point1:TwoDimensionVector, point2:TwoDimensionVector):Float
 	{
-		var pow1:Float = (point1.x - point2.x);
-		pow1 *= pow1;
+		var value1:Float = (point1.x - point2.x);
+		value1 *= value1;
 		
-		var pow2:Float = (point1.y - point2.y);
-		pow2 *= pow2;
+		var value2:Float = (point1.y - point2.y);
+		value2 *= value2;
 		
-		return Math.sqrt(pow1 + pow2);
+		return Math.sqrt(value1 + value2);
 	}
 	
 	inline static public function calculateNextPosition(origin:Vector2, destination:Vector2, direction:Vector2, speed:Float, step:Float, output:Vector2)

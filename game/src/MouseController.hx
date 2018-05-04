@@ -2,13 +2,13 @@ package;
 
 import openfl.display.Stage;
 import openfl.events.MouseEvent;
-import theater.scene.BaseSceneComponent;
+import theater.scene.BaseItirableSceneComponent;
 import theater.scene.Camera;
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.model.BaseActorModel;
 import theater.troupe.actor.model.PositionModel;
 
-class MouseController extends BaseSceneComponent
+class MouseController extends BaseItirableSceneComponent
 {
 	var positionModel:PositionModel;
 	var camera:Camera;

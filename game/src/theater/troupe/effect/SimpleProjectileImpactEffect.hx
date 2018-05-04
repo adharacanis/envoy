@@ -26,6 +26,6 @@ class SimpleProjectileImpactEffect extends BaseEffectViewComponent
 		view.alpha = 1 - (1 - endAlpha) * lifeTimeModel.partOfComplete;
 		
 		if (lifeTimeModel.isComplete)
-			dispatchEvent(new ActorEvent(ActorEvent.DESPAWN, actor, model));
+			dispatchEvent(new ActorEvent(ActorEvent.DESPAWN, actor));
 	}
 }
