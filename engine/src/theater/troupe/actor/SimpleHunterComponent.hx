@@ -36,9 +36,9 @@ class SimpleHunterComponent extends BaseActorComponent
 			if (anchorn == null)
 				anchorn = currentPosition.clone();
 				
-			if (actor.model.state == 1) 
+			if (actor.model.state == 0) 
 			{
-				//positionModel.destinetionPosition.setTo(anchorn.x + Math.random() * 150, anchorn.y + Math.random() * 150);
+				positionModel.destinetionPosition.setTo(anchorn.x + Math.random() * 150, anchorn.y + Math.random() * 150);
 			}
 		}
 		else
@@ -55,22 +55,22 @@ class SimpleHunterComponent extends BaseActorComponent
 			var r = rr;
 			if (distance > range + 15)
 			{
-				r = rr + Math.cos(ii) / 10;
+				//r = rr + Math.cos(ii) / 10;
 				
 			}
 			ii += 0.05;
 			
 			//if (distance > range) 
 			{
-				SimplePhysicsUtils.calculateMovementStep(range-15, direction, positionModel.destinetionPosition);
+				SimplePhysicsUtils.calculateMovementStep(range, direction, positionModel.destinetionPosition);
 				
 				
 				
 				var x = positionModel.destinetionPosition.x;
 				var y = positionModel.destinetionPosition.y;
 				
-				//positionModel.destinetionPosition.setTo(Math.cos(r) * x - Math.sin(r) * y, Math.cos(r) * y + Math.sin(r) * x);
-				positionModel.destinetionPosition.setTo(x, y);
+				positionModel.destinetionPosition.setTo(Math.cos(r) * x - Math.sin(r) * y, Math.cos(r) * y + Math.sin(r) * x);
+				//positionModel.destinetionPosition.setTo(x, y);
 				
 				
 				
