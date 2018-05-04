@@ -56,11 +56,45 @@ class SimpleActorFactory
 		
 		positionModel.speed = 350;
 		
-		//positionModel.worldPositionX = 200;
-		//positionModel.worldPositionY = 100;
+		return actor;
+	}
+	
+	public static function makeBotActor()
+	{
+		var actorModel = new BaseActorModel();
+		var positionModel = new PositionModel();
+		var attackModle = new AttackModel();
+		var enverionmentModel = new EnverionmentModel();
+		var destructableModel = new DestructableModel();
 		
-		//positionModel.worldPositionMovementToX = 500;
-		//positionModel.worldPositionMovementToY = 400;
+		attackModle.attackCooldown = 750 + Math.random() * 500;
+		
+		actorModel.addModel(positionModel);
+		actorModel.addModel(attackModle);
+		actorModel.addModel(enverionmentModel);
+		actorModel.addModel(destructableModel);
+		
+		var view:DisplayObjectData = assetsManager.linkagesMap.get("default").clone();
+		
+		var actor = new BaseActor(actorModel);
+		actor.type = 1;
+		
+		var viewComponent = new BaseViewComponent(actor, view);
+		var positionComponent = new PositionComponent(actor);
+		var attackComponent = new AttackComponent(actor);
+		var targetingComponent = new TargetingComponent(actor);
+		var destructableComponent = new DestructableComponent(actor);
+		var hunterComponent = new SimpleHunterComponent(actor);
+		
+		
+		actor.addComponent(viewComponent);
+		actor.addComponent(positionComponent);
+		actor.addComponent(attackComponent);
+		actor.addComponent(targetingComponent);
+		actor.addComponent(destructableComponent);
+		actor.addComponent(hunterComponent);
+		
+		positionModel.speed = 350;
 		
 		return actor;
 	}

@@ -1,6 +1,7 @@
 package theater.scene;
 
 import MouseController;
+import flash.display.SpreadMethod;
 import gl.GlStage;
 import openfl.events.MouseEvent;
 import theater.events.ActorEvent;
@@ -38,12 +39,17 @@ class TestGameSceneController
 		scene.addComponent(cameraController);
 		
 		mouseController = new MouseController(stage.stage, scene.camera);
-		stage.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouse);
+		scene.addComponent(mouseController);
 		
 		initialise();
 	}
 	
-	function onSpawnActor(actor:BaseActor)
+	function onSpawnActor(e:ActorEvent)
+	{
+		spawn(e.actor);
+	}
+	
+	function spawn(actor:BaseActor)
 	{
 		scene.addActor(actor);
 	}
@@ -57,10 +63,11 @@ class TestGameSceneController
 	function initialise() 
 	{
 		scene.addEventListener(ActorEvent.DESPAWN, onDespawnActor);
+		scene.addEventListener(ActorEvent.SPAWN, onSpawnActor);
 		
 		player = SimpleActorFactory.makeSimpleActor();
 		player.type = 0;
-		player.model.getModel(PositionModel).speed = 250;
+		player.model.getModel(PositionModel).speed -= 2;
 		mouseController.setPlayerData(player.model);
 		
 		var positionModel = player.model.getModel(PositionModel);
@@ -74,18 +81,17 @@ class TestGameSceneController
 		
 		
 		
-		onSpawnActor(player);
+		spawn(player);
 		
 		trace('initialise level');
 		
-		bot = spawnBot();
-		bot2 = spawnBot();
-		bot3 = spawnBot();
+		for(i in 0...50)
+			bot = spawnBot();
 		
-		bot3 = spawnBot();
-		bot3 = spawnBot();
-		bot3 = spawnBot();
-		bot3 = spawnBot();
+		//bot3 = spawnBot();
+		//bot3 = spawnBot();
+		//bot3 = spawnBot();
+		//bot3 = spawnBot();
 	}
 	
 	var bot:BaseActor;
@@ -93,55 +99,23 @@ class TestGameSceneController
 	var bot2:BaseActor;
 	function spawnBot()
 	{
-		var bot = SimpleActorFactory.makeSimpleActor();
+		var bot = SimpleActorFactory.makeBotActor();
 		var envModel:EnverionmentModel = bot.model.getModel(EnverionmentModel);
 		envModel.actorsInRange.push(player.model);
 		
 		var positionModel = bot.model.getModel(PositionModel);
-		positionModel.worldPosition.x = 100 + Math.random() * 300;
-		positionModel.worldPosition.y = 100 + Math.random() * 300;
+		positionModel.worldPosition.x = -1600 + Math.random() * 3200;
+		positionModel.worldPosition.y = -1600 + Math.random() * 3200;
 		
-		positionModel.destinetionPosition.x = 100 + Math.random() * 300;//positionModel.worldPositionX;
-		positionModel.destinetionPosition.y = 100 + Math.random() * 300;//positionModel.worldPositionY;
+		positionModel.destinetionPosition.x = positionModel.worldPosition.x;
+		positionModel.destinetionPosition.y = positionModel.worldPosition.y;
 		
-		onSpawnActor(bot);
+		spawn(bot);
 		return bot;
-	}
-	
-	private function onMouse(e:MouseEvent):Void 
-	{
-		var radius = 333;
-		bot.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-		bot.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + ( -radius + radius * 2 * Math.random());
-		
-		bot2.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-		bot2.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + ( -radius + radius * 2 * Math.random());
-		
-		bot3.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-		bot3.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + (-radius + radius * 2 * Math.random());
 	}
 	
 	public function update()
 	{
-		var radius = 333;
-		if (bot != null && bot.model.state == 0)
-		{
-			bot.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-			bot.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + (-radius + radius * 2 * Math.random());
-		}
-		
-		if (bot2 != null && bot2.model.state == 0)
-		{
-			bot2.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-			bot2.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + (-radius + radius * 2 * Math.random());
-		}
-		
-		if (bot3 != null && bot3.model.state == 0)
-		{
-			bot3.model.getModel(PositionModel).destinetionPosition.x = player.model.getModel(PositionModel).worldPosition.x + (-radius + radius * 2 * Math.random());
-			bot3.model.getModel(PositionModel).destinetionPosition.y = player.model.getModel(PositionModel).worldPosition.y + (-radius + radius * 2 * Math.random());
-		}
-		
 		scene.update();
 		stage.update();
 	}

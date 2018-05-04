@@ -2,19 +2,27 @@ package;
 
 import openfl.display.Stage;
 import openfl.events.MouseEvent;
+import theater.scene.BaseSceneComponent;
 import theater.scene.Camera;
+import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.model.BaseActorModel;
 import theater.troupe.actor.model.PositionModel;
 
-class MouseController 
+class MouseController extends BaseSceneComponent
 {
 	var positionModel:PositionModel;
 	var camera:Camera;
+	var isMouseDown:Bool;
+	var stage:Stage;
 
 	public function new(stage:Stage, camera:Camera) 
 	{
+		super();
+		this.stage = stage;
+		
 		this.camera = camera;
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 	}
 	
 	public function setPlayerData(actor:BaseActorModel)
@@ -22,10 +30,23 @@ class MouseController
 		positionModel = actor.getModel(PositionModel);
 	}
 	
+	private function onMouseUp(e:MouseEvent):Void 
+	{
+		isMouseDown = false;
+	}
+	
 	private function onMouseDown(e:MouseEvent):Void 
 	{
-		positionModel.destinetionPosition.x = e.stageX - 400 + -camera.x;
-		positionModel.destinetionPosition.y = e.stageY - 400 + -camera.y;
+		isMouseDown = true;
+	}
+	
+	override public function update(actor:BaseActor) 
+	{
+		super.update(actor);
+		
+		if (!isMouseDown) return;
+		positionModel.destinetionPosition.x = stage.mouseX * 2 - 400 * 2 + -camera.x;
+		positionModel.destinetionPosition.y = stage.mouseY * 2 - 400 * 2 + -camera.y;
 	}
 	
 }

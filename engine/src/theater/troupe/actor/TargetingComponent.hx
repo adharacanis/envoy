@@ -1,8 +1,10 @@
 package theater.troupe.actor;
 
+import theater.scene.SimplePhysicsUtils;
 import theater.troupe.actor.BaseActor;
 import theater.troupe.actor.BaseActorComponent;
 import theater.troupe.actor.model.EnverionmentModel;
+import theater.troupe.actor.model.PositionModel;
 
 class TargetingComponent extends BaseActorComponent 
 {
@@ -20,6 +22,11 @@ class TargetingComponent extends BaseActorComponent
 		super.update();
 		
 		var target = enverionmentModel.actorsInRange[0];
-		model.target = target;
+		
+		if (target == null) return;
+		if (SimplePhysicsUtils.distance(target.getModel(PositionModel).worldPosition, model.getModel(PositionModel).worldPosition) > 700) 
+			model.target = null;
+		else
+			model.target = target;
 	}
 }

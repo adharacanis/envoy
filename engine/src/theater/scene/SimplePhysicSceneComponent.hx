@@ -83,8 +83,8 @@ class SimplePhysicSceneComponent extends BaseSceneComponent
 		
 		if (a.intersects(b))
 		{
-			actorA.dispatchEvent(new ActorEvent(ActorEvent.DEATH, actorA, actorA.model));
-			actorB.dispatchEvent(new ActorEvent(ActorEvent.DEATH, actorB, actorB.model));
+			actorA.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorA, actorA.model));
+			actorB.dispatchEvent(new ActorEvent(ActorEvent.COLLIDE, actorB, actorB.model));
 		}
 	}
 }

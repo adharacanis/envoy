@@ -12,6 +12,8 @@ class ActorEvent extends Event
 	static public inline var SPAWN:String = "onSpawn";
 	static public inline var DESPAWN:String = "onDespawn";
 	
+	static public inline var COLLIDE:String = "onCollide";
+	
 	static public inline var PROJECTILE_APPLY_DAMAGE:String = "onProjectileApplyDamage";
 	
 	public var actorModel:BaseActorModel;

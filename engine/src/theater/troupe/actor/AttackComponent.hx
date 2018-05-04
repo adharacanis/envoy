@@ -1,7 +1,9 @@
 package theater.troupe.actor;
 
 import theater.events.ActorEvent;
+import theater.scene.SimplePhysicsUtils;
 import theater.troupe.actor.model.AttackModel;
+import theater.troupe.actor.model.PositionModel;
 
 class AttackComponent extends BaseActorComponent 
 {
@@ -18,10 +20,11 @@ class AttackComponent extends BaseActorComponent
 	{
 		super.update();
 		
-		if (model.target != null && checkCooldown(attackModel))
+		var target = model.target;
+		if (target != null && checkCooldown(attackModel) && model.target.deathState == 0 && SimplePhysicsUtils.distance(target.getModel(PositionModel).worldPosition, model.getModel(PositionModel).worldPosition) <= attackModel.attackRange)
 		{
 			attackModel.lastAttackTime = worldStep.currentTime;
-			dispatchEvent(new ActorEvent(ActorEvent.ATTACK, cast target, model));
+			dispatchEvent(new ActorEvent(ActorEvent.ATTACK, actor, model));
 		}
 	}
 	

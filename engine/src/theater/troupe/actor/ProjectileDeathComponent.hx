@@ -15,10 +15,11 @@ class ProjectileDeathComponent extends BaseActorComponent
 	{
 		super.initialize();
 		
-		actor.addEventListener(ActorEvent.DEATH, onDeath);
+		actor.addEventListener(ActorEvent.DEATH, onDestroyed);
+		actor.addEventListener(ActorEvent.COLLIDE, onDestroyed);
 	}
 	
-	private function onDeath(e:ActorEvent):Void 
+	private function onDestroyed(e:ActorEvent):Void 
 	{
 		//play death effect animation
 		//find objects in "damage radius"
