@@ -1,6 +1,7 @@
 package;
 
 import gl.GlStage;
+import input.UserInputController;
 import openfl.display.Sprite;
 import openfl.display3D.Context3D;
 import openfl.display3D.Context3DCompareMode;
@@ -91,17 +92,22 @@ class Main extends Sprite
 	}
 	
 	var worldTime:WorldTimeController;
+	var userInputController:input.UserInputController;
 	
 	private function onAssetReady(e:Event):Void 
 	{	
 		stage.addEventListener(Event.ENTER_FRAME, onUpdate);
 		
-		gameContorller = new TestGameSceneController(glStage, assetsManager);
+		userInputController = new UserInputController(stage);
+		
+		gameContorller = new TestGameSceneController(glStage, userInputController.userInputData, assetsManager);
 		trace('on assets ready');
 	}
 	
 	private function onUpdate(e:Event):Void 
 	{	
+		userInputController.userInputData.mousePosition.setTo(stage.mouseX, stage.mouseY);
+		
 		if (worldTime != null)
 			worldTime.updateTime();
 			

@@ -1,9 +1,7 @@
 package theater.scene;
 
-import MouseController;
-import flash.display.SpreadMethod;
 import gl.GlStage;
-import openfl.events.MouseEvent;
+import input.UserInputData;
 import theater.events.ActorEvent;
 import theater.scene.ProjectileSceneComponent;
 import theater.scene.SimplePhysicSceneComponent;
@@ -18,15 +16,14 @@ class TestGameSceneController
 	var stage:GlStage;
 	
 	var scene:GameScene;
-	var mouseController:MouseController;
+	var sceneMouseInputComponent:SceneMouseInputComponent;
 	var cameraController:TargetCameraComponent;
 	
-	public function new(stage:GlStage, assetsManager:AssetsManager) 
+	public function new(stage:GlStage, userInputData:UserInputData, assetsManager:AssetsManager) 
 	{
 		this.stage = stage;
 		
 		var actorFactory = new SimpleActorFactory(assetsManager);
-		
 		
 		scene = new GameScene(stage);
 		scene.addComponent(new SimplePhysicSceneComponent(scene.actorsList));
@@ -37,8 +34,8 @@ class TestGameSceneController
 		cameraController = new TargetCameraComponent(scene.camera);
 		scene.addComponent(cameraController);
 		
-		mouseController = new MouseController(stage.stage, scene.camera);
-		scene.addComponent(mouseController);
+		sceneMouseInputComponent = new SceneMouseInputComponent(userInputData, scene.camera);
+		scene.addComponent(sceneMouseInputComponent);
 		
 		initialise();
 	}
@@ -71,7 +68,7 @@ class TestGameSceneController
 		var envModel:EnverionmentModel = player.model.getModel(EnverionmentModel);
 		envModel.actorsInRange = scene.actorsList;
 		
-		mouseController.setPlayerData(player.model);
+		sceneMouseInputComponent.setPlayerData(player.model);
 		
 		var positionModel = player.model.getModel(PositionModel);
 		//positionModel.worldPosition.x = 100 + 16;
