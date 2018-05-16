@@ -30,9 +30,9 @@ class ActorDeathComponent extends BaseActorDeathComponent
 						
 						model.deathState = 0;
 						model.state = 0;
-						model.getModel(PositionModel).setPosition( -1600 + Math.random() * 3200, -1600 + Math.random() * 3200);
+						model.getModel(PositionModel).setPosition( -3200 + Math.random() * 6400, -3200 + Math.random() * 6400);
 						model.getModel(DestructableModel).currentHealth = model.getModel(DestructableModel).maxHealth;
-						
+						model.target = null;
 						
 						scene.dispatchEvent(new ActorEvent(ActorEvent.SPAWN, e.actor)); 
 		} );

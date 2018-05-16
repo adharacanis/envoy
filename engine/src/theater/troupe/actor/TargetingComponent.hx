@@ -17,16 +17,17 @@ class TargetingComponent extends BaseActorComponent
 		enverionmentModel = model.getModel(EnverionmentModel);
 	}
 	
+	
 	override public function update() 
 	{
 		super.update();
 		
-		if (model.target != null) return;
-		
 		model.target = null;
 		var myPosition = model.getModel(PositionModel).worldPosition;
 		var actorsList = enverionmentModel.actorsInRange;
+		
 		var lastDistance:Float = 9999999;
+		
 		for (i in 0...actorsList.length)
 		{
 			var currentActor = actorsList[i];
@@ -39,10 +40,12 @@ class TargetingComponent extends BaseActorComponent
 			var distance = SimplePhysicsUtils.distance(targetPosition, myPosition);
 			
 			if (distance > 700) continue;
-			if (distance >= lastDistance) continue;
+			if (distance < lastDistance) {
+				model.target = currentActor.model;
+				lastDistance = distance;
+			}
 			
-			model.target = currentActor.model;
-			lastDistance = distance;
+			
 		}
 	}
 }

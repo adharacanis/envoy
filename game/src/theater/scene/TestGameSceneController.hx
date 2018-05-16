@@ -85,12 +85,12 @@ class TestGameSceneController
 		
 		trace('initialise level');
 		
-		for(i in 0...1)
+		for(i in 0...50)
 			bot = spawnBot();
 			
-		bot = spawnBot();
-		var positionModel = bot.model.getModel(PositionModel);
-		positionModel.setPosition(700, -350);
+		//bot = spawnBot();
+		//var positionModel = bot.model.getModel(PositionModel);
+		//positionModel.setPosition(700, -350);
 		
 		//bot3 = spawnBot();
 		//bot3 = spawnBot();
@@ -108,8 +108,8 @@ class TestGameSceneController
 		envModel.actorsInRange = scene.actorsList;
 		
 		var positionModel = bot.model.getModel(PositionModel);
-		positionModel.setPosition(700, 352);
-		//positionModel.setPosition(-1600 + Math.random() * 3200, -1600 + Math.random() * 3200);
+		//positionModel.setPosition(700, 352);
+		positionModel.setPosition(-3200 + Math.random() * 6400, -3200 + Math.random() * 6400);
 		
 		spawn(bot);
 		return bot;

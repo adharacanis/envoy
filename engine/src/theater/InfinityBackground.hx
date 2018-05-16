@@ -46,7 +46,7 @@ class InfinityBackground
 		HELPER_BUFFER[10] = scale;
 		HELPER_BUFFER[11] = scale;
 		
-		//renderer.drawRawTexture(texture, HELPER_BUFFER);
+		renderer.drawRawTexture(texture, HELPER_BUFFER);
 		//renderer.__draw();
 	}
 }

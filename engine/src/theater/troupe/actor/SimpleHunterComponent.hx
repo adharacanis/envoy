@@ -20,7 +20,7 @@ class SimpleHunterComponent extends BaseActorComponent
 		positionModel = model.getModel(PositionModel);
 	}
 	
-	var rr:Float = Math.PI / (180 + 360 * Math.random());
+	var rr:Float = Math.PI / (18 + 180 * Math.random());
 	var ii:Float = 0;
 	
 	override public function update() 
@@ -41,13 +41,13 @@ class SimpleHunterComponent extends BaseActorComponent
 				positionModel.destinetionPosition.setTo(anchorn.x + Math.random() * 150, anchorn.y + Math.random() * 150);
 			}
 		}
-		else
+		else if(actor.model.state == 0)
 		{
 			var targetPositionModel = target.getModel(PositionModel);
 			
 			var range = attackModel.attackRange;
 			var direction:Vector2 = positionModel.direction;
-			var targetPosition:Vector2 = targetPositionModel.worldPosition;
+			var targetPosition:Vector2 = targetPositionModel.destinetionPosition;
 			var distance = SimplePhysicsUtils.distance(currentPosition, targetPosition); 
 			
 			SimplePhysicsUtils.calculateDirection(currentPosition, targetPosition, distance, direction);

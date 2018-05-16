@@ -11,7 +11,7 @@ class BaseActor extends Observer
 	
 	public var model:BaseActorModel;
 	public var componentsList:Array<BaseActorComponent>;
-	public var componentsMap:Map<String, BaseActorComponent>;
+	public var componentsMap:Map<Int, BaseActorComponent>;
 	
 	var worlStep:WorldStep;
 	
@@ -31,7 +31,7 @@ class BaseActor extends Observer
 	public function addComponentAs<T:BaseActorComponent>(type:Class<T>, component:BaseActorComponent)
 	{
 		componentsList.push(component);
-		var typeValue = Type.getClassName(type);
+		var typeValue = ClassRegistry.getClassId(type);
 		componentsMap.set(typeValue, component);
 		
 		component.target = this;
@@ -43,7 +43,8 @@ class BaseActor extends Observer
 		//	model.addModel(component.model);
 			
 		componentsList.push(component);
-		componentsMap.set(Type.getClassName(Type.getClass(component)), component);
+		var typeValue = ClassRegistry.getClassId(Type.getClass(component));
+		componentsMap.set(typeValue, component);
 		
 		component.target = this;
 	}
@@ -51,20 +52,20 @@ class BaseActor extends Observer
 	public function removeComponent(component:BaseActorComponent)
 	{
 		componentsList.remove(component);
-		componentsMap.remove(Type.getClassName(Type.getClass(component)));
+		//componentsMap.remove(Type.getClassName(Type.getClass(component)));
 		
 		component.target = null;
 	}
 	
-	public function getComponentAs<T:BaseActorComponent>(type:String, clazz:Class<T>):Null<T>
+	public function getComponentAs<T:BaseActorComponent>(type:Class<T>, clazz:Class<T>):Null<T>
 	{
-		var value = cast componentsMap.get(type);
+		var value = cast componentsMap.get(ClassRegistry.getClassId(type));
 		return value;
 	}
 	
-	public function getComponent<T:BaseActorComponent>(clazz:Class<T>):Null<T>
+	public function getComponent<T:BaseActorComponent>(type:Class<T>):Null<T>
 	{
-		var value = cast componentsMap.get(Type.getClassName(clazz));
+		var value = cast componentsMap.get(ClassRegistry.getClassId(type));
 		return value;
 	}
 	
