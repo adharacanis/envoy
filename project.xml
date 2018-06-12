@@ -6,7 +6,7 @@
 	<meta title="envoy" package="com.etherlords.envoy" version="1.0.0" company="..." />
 	
 	<!-- output -->
-	<app main="Main" file="envoy" path="bin" swf-version="11.2" />
+	<app main="tests.TestContainerPerfomance" file="envoy" path="bin" swf-version="11.2" />
 	
 	<window background="#CCCCCC" fps="1024" antialiasing="0"/>
 	<window width="800" height="800" resizable="false" borderless="false" unless="mobile" />
@@ -34,7 +34,7 @@
 	<!---> <haxeflag name="-D webgl1"/> <!---->
 	
 	<haxedef name="advanced-telemetry" if="flash" />
-	<!----><haxedef name="no-inline"/><!---->
+	<!---><haxedef name="no-inline"/><!---->
 	<!-- 
 	<haxeflag name="-dce full" /> 
 	-->
