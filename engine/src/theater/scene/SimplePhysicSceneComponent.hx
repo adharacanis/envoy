@@ -61,13 +61,13 @@ class SimplePhysicSceneComponent extends BaseItirableSceneComponent
 	var b:Rectangle = new Rectangle();
 	function checkColission(actorA:BaseActor, actorB:BaseActor) 
 	{
-		if (SimplePhysicsUtils.filter(actorA, actorB)) return;
+		var positionModelA = actorA.model.getModel(PositionModel);
+		var positionModelB = actorB.model.getModel(PositionModel);
+
+		if (SimplePhysicsUtils.filter(positionModelA, positionModelB)) return;
 			
 		var viewComponentA = actorA.getComponent(BaseViewComponent);
 		var viewComponentB = actorB.getComponent(BaseViewComponent);
-		
-		var positionModelA = actorA.model.getModel(PositionModel);
-		var positionModelB = actorB.model.getModel(PositionModel);
 		
 		var halfSize = 13 * viewComponentA.view.scaleX;
 		var size = 26 * viewComponentA.view.scaleX;

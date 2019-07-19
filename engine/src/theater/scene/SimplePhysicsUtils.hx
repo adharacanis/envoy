@@ -1,7 +1,7 @@
 package theater.scene;
 
 import lime.math.Vector2;
-import theater.troupe.actor.BaseActor;
+import theater.troupe.actor.model.PositionModel;
 
 using lime.math.Vector2;
 
@@ -18,7 +18,7 @@ class SimplePhysicsUtils
 		
 	}
 	
-	inline static public function filter(actorA:BaseActor, actorB:BaseActor)
+	inline static public function filter(modelA:PositionModel, modelB:PositionModel)
 	{
 		/*
 		if (actor == damageSource) continue;
@@ -36,8 +36,10 @@ class SimplePhysicsUtils
 		if (actorA.type == 1 && actorB.type == 2) return;
 		if (actorA.type == 2 && actorB.type == 2) return;
 		*/
+
+		return modelA == modelB || modelA.group.filterGroup(modelB.group);
 		
-		return if (actorA == actorB) true;
+		/*return if (actorA == actorB) true;
 		else if (actorA.type == 3 || actorB.type == 3) true;
 		else if (actorA.id == actorB.id) true;
 		//if (actorA.type == 2 && actorB.type == 1) false;
@@ -45,8 +47,8 @@ class SimplePhysicsUtils
 		else if (actorA.type == 2 && actorB.type == 2) true;
 		//if (actorA.type == 0 && actorB.type == 2) true;
 		//if (actorA.type == 2 && actorB.type == 0) true;
-		
-		else return false;
+
+		else return false;*/
 	}
 	
 	inline static public function inRadius(radius:Float, appliationPoint:TwoDimensionVector, interestPoint:TwoDimensionVector):Bool
