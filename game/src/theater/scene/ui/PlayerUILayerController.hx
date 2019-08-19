@@ -1,4 +1,5 @@
 package theater.scene.ui;
+
 import theater.troupe.actor.BaseActor;
 
 class PlayerUILayerController

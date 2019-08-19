@@ -1,5 +1,6 @@
 package input;
 
+import gl.GlStage;
 import events.Observer;
 import input.BaseInputAction;
 import input.InputInteractionEvent;
@@ -17,10 +18,14 @@ class UserInputController extends Observer
 	
 	var mouseController:MouseController;
 	var keyboardController:input.KeyboardController;
+
+	var glStage:GLStage;
 	
-	public function new(stage:Stage) 
+	public function new(stage:Stage, glStage:GlStage)
 	{
 		super();
+
+		this.glStage = glStage;
 		
 		mouseController = new MouseController(stage, userInputData);
 		keyboardController = new KeyboardController(stage, userInputData);
@@ -39,6 +44,7 @@ class UserInputController extends Observer
 		if (actions.exists(keyCode)) return;
 		
 		var action = actions.get(keyCode);
+		action.execute(false);
 		dispatchEvent(new UserInputEvent(UserInputEvent.INPUT, action.actionID, InputState.UP));
 	}
 	
@@ -49,6 +55,7 @@ class UserInputController extends Observer
 		if (actions.exists(keyCode)) return;
 		
 		var action = actions.get(keyCode);
+		action.execute(true);
 		dispatchEvent(new UserInputEvent(UserInputEvent.INPUT, action.actionID, InputState.DOWN));
 	}
 	

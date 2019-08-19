@@ -13,7 +13,7 @@ class MouseController extends Observer
 	var keysState:Map<Int, Bool> = new Map();
 	var userInputData:UserInputData;
 
-	public function new(stage:Stage, userInputData:UserInputData) 
+	public function new(stage:Stage, userInputData:UserInputData)
 	{
 		super();
 		
